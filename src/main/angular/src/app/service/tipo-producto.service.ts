@@ -19,4 +19,18 @@ export class TipoProductoService {
   getTipos(): Observable<TipoProducto[]> {
     return this.http.get<TipoProducto[]>(this.url);
   }
+
+  getTipo(id: number): Observable<TipoProducto> {
+    const idUrl = `${this.url}/${id}`;
+    
+    return this.http.get<TipoProducto>(idUrl);
+  }
+
+  crearTipo(tipo: TipoProducto): Observable<number> {
+    return this.http.post<number>(this.url, tipo, this.options);
+  }
+
+  modificarTipo(tipo: TipoProducto): Observable<never> {
+    return this.http.put<never>(this.url, tipo, this.options);
+  }
 }
