@@ -1,11 +1,13 @@
 package es.cic.bootcamp.grupo03final.conversor;
 
 import javax.validation.Valid;
+import org.springframework.stereotype.Component;
 
-import es.cic.bootcamp.grupo03.dto.ProductoDto;
+import es.cic.bootcamp.grupo03final.dto.ProductoDto;
 import es.cic.bootcamp.grupo03final.modelo.Producto;
 import es.cic.bootcamp.grupo03final.modelo.TipoProducto;
 
+@Component
 public class ProductoConversor {
 
 	

@@ -15,8 +15,8 @@ import es.cic.bootcamp.grupo03final.dto.ProductoDto;
 import es.cic.bootcamp.grupo03final.excepcion.CreateProductoExcepcion;
 import es.cic.bootcamp.grupo03final.modelo.Producto;
 import es.cic.bootcamp.grupo03final.modelo.TipoProducto;
-import es.cic.bootstrap.grupo03final.repositorio.ProductoRepositorio;
-import es.cic.bootstrap.grupo03final.repositorio.TipoProductoRepositorio;
+import es.cic.bootcamp.grupo03final.repositorio.ProductoRepositorio;
+import es.cic.bootcamp.grupo03final.repositorio.TipoProductoRepositorio;
 
 @Service
 @Transactional
