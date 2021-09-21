@@ -57,5 +57,6 @@ import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 		public void borrar(@PathVariable(required = true, name="id") Long id) {
 			LOGGER.info("borra un registro de tipo de producto");
 			tipoProductoServicio.borrar(id);
+			
 		}
 	}
