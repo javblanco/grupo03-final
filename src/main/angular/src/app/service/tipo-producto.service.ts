@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { TipoProducto } from '../model/tipoProducto';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { TipoProducto } from '../model/tipoProducto';
 })
 export class TipoProductoService {
 
-  url = 'api/tipoProducto';
+  url = `${environment.host}/api/tipoProducto`;
 
   options = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

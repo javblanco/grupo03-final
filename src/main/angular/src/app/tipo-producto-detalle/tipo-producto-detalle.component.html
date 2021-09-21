@@ -7,6 +7,13 @@
 <label for="tipo-descripcion">Descripción: </label>
 <textarea id="tipo-descripcion" [(ngModel)]="tipo.descripcion"></textarea><br>
 
-<button id="tipo-guardar" (click)="guardar()">Guardar</button> <button id="tipo-volver" (click)="volver()">Volver</button>
+<button id="tipo-guardar" (click)="guardar()">Guardar</button> 
+<span *ngIf="tipo.id">
+
+<span *ngIf="tipo.activo; then desactivar_tipo else activar_tipo">será ignorado</span> 
+    <ng-template #desactivar_tipo><button id="tipo-activo" (click)="cambiarActivo()">Baja</button></ng-template> 
+    <ng-template #activar_tipo><button id="tipo-activo" (click)="cambiarActivo()">Alta</button></ng-template> 
+</span>
+<button id="tipo-volver" (click)="volver()">Volver</button>
 
 <div *ngIf="mensaje" id="feedback">{{mensaje}}</div>

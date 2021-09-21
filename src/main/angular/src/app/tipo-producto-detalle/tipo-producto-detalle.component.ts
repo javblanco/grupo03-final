@@ -56,4 +56,20 @@ export class TipoProductoDetalleComponent implements OnInit {
     .subscribe();
     this.mensaje = 'Se ha modificado el registro';
   }
+
+  cambiarActivo(): void {
+    if(this.tipo.id) {
+      if(this.tipo.activo) {
+        this.tipo.activo = false;
+        this.tipoService.modificarTipo(this.tipo)
+        .subscribe();
+        this.mensaje = 'Se ha dado el registro de baja';
+      } else {
+        this.tipo.activo = true;
+        this.tipoService.modificarTipo(this.tipo)
+        .subscribe();
+        this.mensaje = 'Se ha dado el registro de alta';
+      }
+    }
+  }
 }
