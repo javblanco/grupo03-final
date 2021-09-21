@@ -40,7 +40,6 @@ public TipoProductoDto leer(Long id) {
 	Optional<TipoProducto> optional = tipoProductoRepositorio.findById(id);
 	
 	if(optional.isPresent()) {
-		
 		return tipoProductoConversor.entityToDto(optional.get());
 	}else{
 		return null;
@@ -66,10 +65,35 @@ public TipoProductoDto modificar(TipoProductoDto dto) {
 	return tipoProductoConversor.entityToDto(tipoProductoRepositorio.save(tipoProducto));
 }
 
-public void borrar(Long id) {
-	tipoProductoRepositorio.deleteById(id);
+//public void borrar(Long id) {
+	//tipoProductoRepositorio.deleteById(id);
+//}
+
+public void darDeBaja(Long id) {
+	Optional<TipoProducto> optional = tipoProductoRepositorio.findById(id);
+	TipoProducto tipoProducto = new TipoProducto();
+	
+	if(optional.isPresent()) {
+		tipoProducto = optional.get();
+		tipoProducto.setActivo(false);
+	}else{
+		throw new TipoProductoExcepcion(MENSAJE_EXCEPCION);
+	}
 }
 
+public void darDeAlta(Long id) {
+	Optional<TipoProducto> optional = tipoProductoRepositorio.findById(id);
+	TipoProducto tipoProducto = new TipoProducto();
+	
+	if(optional.isPresent()) {
+		tipoProducto = optional.get();
+		tipoProducto.setActivo(true);
+	}else{
+		throw new TipoProductoExcepcion(MENSAJE_EXCEPCION);
+	}
 }
+	
+}
+
 
 

@@ -17,7 +17,7 @@ import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 
 
 	@RestController
-	@RequestMapping("/tipoProducto")
+	@RequestMapping("/api/tipo-producto")
 	@CrossOrigin(origins = "http://localhost:4200")
 	
 	public class TipoProductoControlador {
@@ -53,10 +53,21 @@ import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 			return tipoProductoServicio.modificar(tipoProducto);
 		}
 		
-		@DeleteMapping("/{id}")
-		public void borrar(@PathVariable(required = true, name="id") Long id) {
-			LOGGER.info("borra un registro de tipo de producto");
-			tipoProductoServicio.borrar(id);
-			
+		//@DeleteMapping
+		//public void borrar(@PathVariable(required = true, name="id") Long id) {
+			//LOGGER.info("borra un registro de tipo de producto");
+			//tipoProductoServicio.borrar(id);
+		//}
+		
+		@PostMapping("/desactivar/{id}")
+		public void darDeBaja(@PathVariable(required = true, name="id") Long id) {
+			LOGGER.info("desactiva un tipo de producto");
+			tipoProductoServicio.darDeBaja(id);
+		}
+		
+		@PostMapping("/activar/{id}")
+		public void darDeAlta(@PathVariable(required = true, name="id") Long id) {
+			LOGGER.info("activo un tipo de producto");
+			tipoProductoServicio.darDeAlta(id);
 		}
 	}
