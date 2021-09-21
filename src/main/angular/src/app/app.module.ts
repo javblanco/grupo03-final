@@ -13,12 +13,14 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { TipoProductoMaestroComponent } from './tipo-producto-maestro/tipo-producto-maestro.component';
 import { TipoProductoDetalleComponent } from './tipo-producto-detalle/tipo-producto-detalle.component';
+import { ProductoMaestroComponent } from './producto-maestro/producto-maestro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TipoProductoMaestroComponent,
-    TipoProductoDetalleComponent
+    TipoProductoDetalleComponent,
+    ProductoMaestroComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,37 @@
+<h2 id="titulo-producto-maestro">Listado de productos</h2>
+
+<table id="tabla-producto">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Modelo</th>
+            <th>Marca</th>
+            <th>Tipo de producto</th>
+            <th>Stock total</th>
+            <th>Cantidad en almacen</th>
+            <th>Cantidad en tienda</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let producto of productos">
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.modelo}}</td>
+            <td>{{producto.marca}}</td>
+            <td>{{producto.nombreTipoProducto}}</td>
+            <td>{{producto.cantidadTotal}}</td>
+            <td>{{producto.cantidadAlmacen}}</td>
+            <td>{{producto.cantidadTienda}}</td>
+            <td><button><a routerLink="../{{producto.id}}">Ver</a></button>
+                <button><a routerLink="../{{producto.id}}">Modificar</a></button></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="container">
+    <div class="row">
+        <div class="col-2"><button id="crear-producto"><a routerLink="../">Crear</a></button></div>
+        <div class="col"></div>
+        <div class="col-2"><button id="volver-listado-producto" (click)="volver()">Volver</button></div>
+    </div>
+</div>
