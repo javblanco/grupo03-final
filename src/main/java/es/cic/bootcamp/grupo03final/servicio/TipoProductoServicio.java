@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.cic.bootcamp.grupo03.dto.TipoProductoDto;
 import es.cic.bootcamp.grupo03final.conversor.TipoProductoConversor;
+import es.cic.bootcamp.grupo03final.dto.TipoProductoDto;
 import es.cic.bootcamp.grupo03final.excepcion.TipoProductoExcepcion;
 import es.cic.bootcamp.grupo03final.modelo.TipoProducto;
-import es.cic.bootstrap.grupo03final.repositorio.TipoProductoRepositorio;
+import es.cic.bootcamp.grupo03final.repositorio.TipoProductoRepositorio;
 
 @Service
 @Transactional

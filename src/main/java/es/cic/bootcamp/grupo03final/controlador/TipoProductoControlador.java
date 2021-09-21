@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.cic.bootcamp.grupo03.dto.TipoProductoDto;
+import es.cic.bootcamp.grupo03final.dto.TipoProductoDto;
 import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 
 

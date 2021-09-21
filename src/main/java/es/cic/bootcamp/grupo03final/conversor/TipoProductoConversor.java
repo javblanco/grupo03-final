@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import es.cic.bootcamp.grupo03.dto.TipoProductoDto;
+import es.cic.bootcamp.grupo03final.dto.TipoProductoDto;
 import es.cic.bootcamp.grupo03final.modelo.TipoProducto;
 
 @Component

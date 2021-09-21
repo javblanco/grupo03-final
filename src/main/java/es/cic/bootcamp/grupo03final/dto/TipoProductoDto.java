@@ -1,4 +1,4 @@
-package es.cic.bootcamp.grupo03.dto;
+package es.cic.bootcamp.grupo03final.dto;
 
 public class TipoProductoDto {
 
