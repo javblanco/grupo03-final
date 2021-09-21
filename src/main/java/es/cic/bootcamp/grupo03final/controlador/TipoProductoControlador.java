@@ -17,7 +17,7 @@ import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 
 
 	@RestController
-	@RequestMapping("/alquiler")
+	@RequestMapping("/tipoProducto")
 	@CrossOrigin(origins = "http://localhost:4200")
 	
 	public class TipoProductoControlador {
@@ -35,9 +35,9 @@ import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 		}
 		
 		@PostMapping
-		public TipoProductoDto crear(@RequestBody TipoProductoDto alquiler) {
+		public TipoProductoDto crear(@RequestBody TipoProductoDto tipoProducto) {
 			LOGGER.info("crea un registro de tipo de producto");
-			return tipoProductoServicio.crear(alquiler);
+			return tipoProductoServicio.crear(tipoProducto);
 		}
 
 
