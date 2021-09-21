@@ -43,8 +43,8 @@ public class ProductoConversor {
 		dto.setNombre(p.getNombre());
 				
 		if(p.getTipoProducto() !=null) {
-			dto.setIdGrupo(p.getTipoProducto().//TODO());
-			dto.setGrupo(p.getTipoProducto().//TODO);
+			dto.setId(p.getTipoProducto().getId());
+			dto.setTipoProducto(p.getTipoProducto());
 		}
 		
 		return dto;

@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 
 import es.cic.bootcamp.grupo03final.dto.ProductoDto;
+import es.cic.bootcamp.grupo03final.dto.TipoProductoDto;
 import es.cic.bootcamp.grupo03final.servicio.ProductoServicio;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/producto")
+@RequestMapping("/api/producto")
 public class ProductoControlador {
 
 	@Autowired
@@ -58,5 +59,28 @@ public class ProductoControlador {
 		productoServicio.delete(id);
 	}
 
+	
+	@PostMapping("/transferir")
+	public void transferirTienda(@RequestBody TipoProductoDto dto) {
+		
+		//Trasnferir la cantidad indicada del producto indicado del tipo indicado
+		// del almacen a la tienda
+		
+	}
+	
+	@PostMapping("/devolver")
+	public void devolverAlmacen(@RequestBody TipoProductoDto dto) {
+		
+		//Trasnferir la cantidad indicada del producto indicado del tipo indicado
+		// de la tienda al almacen
+		
+	}
+	
+	@PostMapping("/pedir")
+	public void pedirAlmacen(@RequestBody TipoProductoDto dto) {
+		
+		//Pedir nuevo stock al almacen.
+		
+	}
 	
 }
