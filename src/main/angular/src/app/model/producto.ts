@@ -1,11 +1,11 @@
 export interface Producto {
     id: number;
     nombre: string;
-    modelo: string;
+    idTipoProducto: number;
+    nombreTipoProducto: string;
     marca: string;
+    modelo: string;
     cantidadAlmacen: number;
     cantidadTienda: number;
     cantidadTotal: number;
-    idTipoProducto: number;
-    nombreTipoProducto: string;
 }

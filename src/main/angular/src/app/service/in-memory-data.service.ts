@@ -19,10 +19,10 @@ export class InMemoryDataService implements InMemoryDbService{
     ];
 
     const producto = [
-      {id:1, nombre: 'Noespresso', marca: 'Cafeteras SA', modelo: 'Noespresso 3000', cantidadAlmacen: 10, cantidadTienda: 2, cantidadTotal: 12, idProductoProducto: 1, nombreTipoProducto: 'Cafetera'},
-      {id:2, nombre: 'Boligrafo negro', marca: 'Material Boc', modelo: 'Serie clásica', cantidadAlmacen: 10, cantidadTienda: 2, cantidadTotal: 12, idProductoProducto: 2, nombreTipoProducto: 'Bolígrafo'},
-      {id:3, nombre: 'Goma de vainilla', marca: 'Turín', modelo: 'Turín 400', cantidadAlmacen: 10, cantidadTienda: 2, cantidadTotal: 12, idProductoProducto: 1, nombreTipoProducto: 'Goma'},
-      {id:4, nombre: 'Libreta de anillas', marca: 'Cambrige', modelo: 'Clásico verde', cantidadAlmacen: 10, cantidadTienda: 2, cantidadTotal: 12, idProductoProducto: 1, nombreTipoProducto: 'Libreta'},
+      {id:1, nombre: 'Noespresso', marca: 'Cafeteras SA', modelo: 'Noespresso 3000', cantidadAlmacen: 10, cantidadTienda: 2, cantidadTotal: 12, idTipoProducto: 1, nombreTipoProducto: 'Cafetera'},
+      {id:2, nombre: 'Boligrafo negro', marca: 'Material Boc', modelo: 'Serie clásica', cantidadAlmacen: 10, cantidadTienda: 2, cantidadTotal: 12, idTipoProducto: 2, nombreTipoProducto: 'Bolígrafo'},
+      {id:3, nombre: 'Goma de vainilla', marca: 'Turín', modelo: 'Turín 400', cantidadAlmacen: 10, cantidadTienda: 2, cantidadTotal: 12, idTipoProducto: 3, nombreTipoProducto: 'Goma'},
+      {id:4, nombre: 'Libreta de anillas', marca: 'Cambrige', modelo: 'Clásico verde', cantidadAlmacen: 10, cantidadTienda: 2, cantidadTotal: 12, idTipoProducto: 4, nombreTipoProducto: 'Libreta'},
 
     ]
     return {tipoProducto, producto}
