@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TipoProducto } from '../model/tipoProducto';
 import { TipoProductoService } from '../service/tipo-producto.service';
+import { TipoProductoMaestroComponent } from '../tipo-producto-maestro/tipo-producto-maestro.component';
 
 @Component({
   selector: 'app-tipo-producto-detalle',
@@ -14,6 +15,12 @@ export class TipoProductoDetalleComponent implements OnInit {
   tipo = <TipoProducto>{};
 
   mensaje?: string;
+
+  lectura = false;
+
+
+  
+
 
   constructor(private tipoService: TipoProductoService,
     private location: Location,
@@ -30,6 +37,7 @@ export class TipoProductoDetalleComponent implements OnInit {
     if(id) {
       this.tipoService.getTipo(id)
       .subscribe(tipo => this.tipo = tipo);
+      this.lectura = this.tipoService.lectura;
     }
   }
 
@@ -72,4 +80,6 @@ export class TipoProductoDetalleComponent implements OnInit {
       }
     }
   }
+
+ 
 }
