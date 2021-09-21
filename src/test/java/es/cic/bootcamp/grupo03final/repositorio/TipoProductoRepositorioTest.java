@@ -90,8 +90,59 @@ class TipoProductoRepositorioTest{
 		
 	}
 	
+	@Test
+	void testDarDeBaja() {
+		TipoProducto tipoProductoALeer = entityManager.persist(generarTipoProducto());
+		entityManager.flush();
+		TipoProducto tipoProductoEnBBDD = tipoProductoRepositorio.findById(tipoProductoALeer.getId()).get();
+		
+		tipoProductoEnBBDD.setActivo(false);
+		entityManager.flush();
+		
+		TipoProducto tipoProductoTrasActualizar = entityManager.find(TipoProducto.class , tipoProductoALeer.getId());
+		
+		assertEquals(false,tipoProductoTrasActualizar.isActivo(),"No se ha dado de baja");
+		
+	}
+	
+	@Test
+	void testDarDeAlta() {
+		TipoProducto tipoProductoALeer = entityManager.persist(generarTipoProducto2());
+		entityManager.flush();
+		TipoProducto tipoProductoEnBBDD = tipoProductoRepositorio.findById(tipoProductoALeer.getId()).get();
+		
+		tipoProductoEnBBDD.setActivo(true);
+		entityManager.flush();
+		
+		TipoProducto tipoProductoTrasActualizar = entityManager.find(TipoProducto.class , tipoProductoALeer.getId());
+		
+		assertEquals(true,tipoProductoTrasActualizar.isActivo(),"No se ha dado de baja");
+		
+	}
+	@Test
+	void testBorrar() {
+		//Este test es si es necesario borrar un producto en el futuro, por ahora solo se desactivan
+		TipoProducto tipoProductoABorrar = entityManager.persist(generarTipoProducto());
+		entityManager.flush();
+		
+		tipoProductoRepositorio.deleteById(tipoProductoABorrar.getId());
+		entityManager.flush();
+		
+		TipoProducto tipoProductoTrasBorrar = entityManager.find(TipoProducto.class ,tipoProductoABorrar.getId());
+		assertNull(tipoProductoTrasBorrar,"No se ha eliminado el Producto");
+		
+	}
+	
+	
 	private TipoProducto generarTipoProducto() {
 		TipoProducto tipoProducto = new TipoProducto();
+		tipoProducto.setNombre("Lavadora");
+		tipoProducto.setDescripcion("Electrodoméstico para lavar la ropa.");
+		return tipoProducto;
+	}
+	private TipoProducto generarTipoProducto2() {
+		TipoProducto tipoProducto = new TipoProducto();
+		tipoProducto.setActivo(false);
 		tipoProducto.setNombre("Lavadora");
 		tipoProducto.setDescripcion("Electrodoméstico para lavar la ropa.");
 		return tipoProducto;
