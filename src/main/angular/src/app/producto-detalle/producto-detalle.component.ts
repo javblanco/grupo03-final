@@ -17,6 +17,8 @@ export class ProductoDetalleComponent implements OnInit {
 
   listaTipos: TipoProducto[] = [];
 
+  mensaje?: string;
+
   constructor(
     private productoService: ProductoService,
     private tipoService: TipoProductoService,
@@ -49,11 +51,13 @@ export class ProductoDetalleComponent implements OnInit {
     if(this.producto.id) {
       this.productoService.modificarProducto(this.producto)
       .subscribe();
+      this.mensaje='Se ha modificado el producto';
     } else {
       this.productoService.crearProducto(this.producto)
       .subscribe(
         producto => this.producto.id = producto
       );
+      this.mensaje='Se ha creado el producto';
     }
   }
 
