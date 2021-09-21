@@ -3,16 +3,18 @@
 <ng-template #modificar_tipo><h2>Modificar tipo de producto</h2></ng-template>
 
 <label for="tipo-nombre">Nombre: </label>
-<input id="tipo-nombre" type="text" [(ngModel)]="tipo.nombre"> <br>
+<input id="tipo-nombre" type="text" [(ngModel)]="tipo.nombre" [disabled]="lectura"> <br>
 <label for="tipo-descripcion">Descripción: </label>
-<textarea id="tipo-descripcion" [(ngModel)]="tipo.descripcion"></textarea><br>
+<textarea id="tipo-descripcion" [(ngModel)]="tipo.descripcion" [disabled]="lectura"></textarea><br>
 
-<button id="tipo-guardar" (click)="guardar()">Guardar</button> 
+<button id="tipo-guardar" (click)="guardar()" [disabled]="lectura">Guardar</button> 
 <span *ngIf="tipo.id">
 
-<span *ngIf="tipo.activo; then desactivar_tipo else activar_tipo">será ignorado</span> 
-    <ng-template #desactivar_tipo><button id="tipo-activo" (click)="cambiarActivo()">Baja</button></ng-template> 
-    <ng-template #activar_tipo><button id="tipo-activo" (click)="cambiarActivo()">Alta</button></ng-template> 
+<span *ngIf="!lectura">
+    <span *ngIf="tipo.activo && !lectura; then desactivar_tipo else activar_tipo">será ignorado</span> 
+        <ng-template #desactivar_tipo><button id="tipo-activo" (click)="cambiarActivo()">Baja</button></ng-template> 
+        <ng-template #activar_tipo><button id="tipo-activo" (click)="cambiarActivo()">Alta</button></ng-template> 
+    </span>
 </span>
 <button id="tipo-volver" (click)="volver()">Volver</button>
 

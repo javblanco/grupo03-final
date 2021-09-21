@@ -17,6 +17,7 @@ export class ProductoMaestroComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProductos();
+    this.service.desactivarSoloLectura();
   }
 
   getProductos(): void {
@@ -28,5 +29,9 @@ export class ProductoMaestroComponent implements OnInit {
 
   volver(): void {
     this.location.back();
+  }
+
+  ver(): void {
+    this.service.activarSoloLectura();
   }
 }

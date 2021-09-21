@@ -11,6 +11,8 @@ export class ProductoService {
 
   url = `${environment.host}/api/producto`;
   
+  lectura = false;
+
   options = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   }
@@ -35,4 +37,11 @@ export class ProductoService {
     return this.http.put<never>(this.url, producto, this.options);
   }
 
+  activarSoloLectura(): void {
+    this.lectura = true;
+  }
+
+  desactivarSoloLectura(): void {
+    this.lectura = false;
+  }
 }

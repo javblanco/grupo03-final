@@ -12,11 +12,14 @@ export class TipoProductoMaestroComponent implements OnInit {
 
   tipos: TipoProducto[] = [];
 
+  visible = false;
+
   constructor(private tipoService: TipoProductoService,
     private location: Location) { }
 
   ngOnInit(): void {
     this.getTipos();
+    this.tipoService.desactivarSoloLectura();
   }
 
   getTipos(): void {
@@ -26,5 +29,9 @@ export class TipoProductoMaestroComponent implements OnInit {
 
   volver(): void {
     this.location.back();
+  }
+
+  ver(): void {
+    this.tipoService.activarSoloLectura();
   }
 }

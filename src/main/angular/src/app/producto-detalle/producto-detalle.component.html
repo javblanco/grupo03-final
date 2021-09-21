@@ -3,27 +3,27 @@
 <ng-template #modificar_tipo><h2>Modificar producto</h2></ng-template>
 
 <label for="producto-nombre">Nombre: </label>
-<input id="producto-nombre" type="text" [(ngModel)]="producto.nombre"><br>
+<input id="producto-nombre" type="text" [(ngModel)]="producto.nombre" [disabled]="lectura"><br>
 
 <label for="producto-tipo">Tipo de producto: </label>
-<select [(ngModel)]="producto.idTipoProducto" name="tipo" id="producto-tipo">
+<select [(ngModel)]="producto.idTipoProducto" name="tipo" id="producto-tipo" [disabled]="lectura">
     <option value="undefined" selected>Seleccione una opción</option>
     <option *ngFor="let tipo of listaTipos" [ngValue]="tipo.id">{{tipo.nombre}}</option>
 </select><br>
 
 <label for="producto-marca">Marca: </label>
-<input id="producto-marca" type="text" [(ngModel)]="producto.marca"><br>
+<input id="producto-marca" type="text" [(ngModel)]="producto.marca" [disabled]="lectura"><br>
 
 <label for="producto-modelo">Modelo: </label>
-<input id="producto-modelo" type="text" [(ngModel)]="producto.modelo"><br>
+<input id="producto-modelo" type="text" [(ngModel)]="producto.modelo" [disabled]="lectura"><br>
 
 <label for="producto-stock-almacen">Cantidad en almacén: </label>
-<input id="producto-stock-almacen" type="number" [(ngModel)]="producto.cantidadAlmacen"><br>
+<input id="producto-stock-almacen" type="number" [(ngModel)]="producto.cantidadAlmacen" [disabled]="lectura"><br>
 
 <label for="producto-stock-tienda">Cantidad en tienda: </label>
-<input id="producto-stock-tienda" type="number" [(ngModel)]="producto.cantidadTienda"><br>
+<input id="producto-stock-tienda" type="number" [(ngModel)]="producto.cantidadTienda" [disabled]="lectura"><br>
 
-<button id="producto-guardar" (click)="guardar()">Guardar</button> 
+<button id="producto-guardar" (click)="guardar()" *ngIf="!lectura">Guardar</button> 
 <button id="producto-volver" (click)="volver()">Volver</button>
 
 <div id="feedback" *ngIf="mensaje">{{mensaje}}</div>

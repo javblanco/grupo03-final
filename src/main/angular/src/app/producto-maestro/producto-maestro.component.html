@@ -22,7 +22,7 @@
             <td>{{producto.cantidadTotal}}</td>
             <td>{{producto.cantidadAlmacen}}</td>
             <td>{{producto.cantidadTienda}}</td>
-            <td><button><a routerLink="../{{producto.id}}">Ver</a></button>
+            <td><button><a routerLink="../{{producto.id}}" (click)="ver()">Ver</a></button>
                 <button><a routerLink="../{{producto.id}}">Modificar</a></button></td>
         </tr>
     </tbody>

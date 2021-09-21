@@ -10,7 +10,7 @@
     <tbody>
         <tr *ngFor="let tipo of tipos">
             <td>{{tipo.nombre}}</td>
-            <td><button><a routerLink="../{{tipo.id}}">Ver</a></button>
+            <td><button><a routerLink="../{{tipo.id}}" (click)="ver()">Ver</a></button>
                 <button><a routerLink="../{{tipo.id}}">Modificar</a></button></td>
         </tr>
     </tbody>

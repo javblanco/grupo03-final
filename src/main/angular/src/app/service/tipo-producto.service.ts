@@ -11,6 +11,8 @@ export class TipoProductoService {
 
   url = `${environment.host}/api/tipoProducto`;
 
+  lectura = false;
+
   options = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   }
@@ -33,5 +35,13 @@ export class TipoProductoService {
 
   modificarTipo(tipo: TipoProducto): Observable<never> {
     return this.http.put<never>(this.url, tipo, this.options);
+  }
+
+  activarSoloLectura(): void {
+    this.lectura = true;
+  }
+
+  desactivarSoloLectura(): void {
+    this.lectura = false;
   }
 }

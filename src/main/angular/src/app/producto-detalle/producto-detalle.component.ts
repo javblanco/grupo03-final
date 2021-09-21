@@ -19,6 +19,8 @@ export class ProductoDetalleComponent implements OnInit {
 
   mensaje?: string;
 
+  lectura = false;
+
   constructor(
     private productoService: ProductoService,
     private tipoService: TipoProductoService,
@@ -43,7 +45,9 @@ export class ProductoDetalleComponent implements OnInit {
       this.productoService.getProducto(id)
       .subscribe(
         producto => this.producto = producto
-      )
+      );
+
+      this.lectura = this.productoService.lectura;
     } 
   }
 
