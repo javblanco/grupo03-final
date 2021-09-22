@@ -1,6 +1,7 @@
-<h2 id="titulo-producto-maestro">Listado de productos</h2>
+<div class="jumbotron"><h2 id="titulo-producto-maestro">Listado de productos</h2></div>
 
-<table id="tabla-producto">
+<div class="container container-xl">
+<table id="tabla-producto" class="table mb-5">
     <thead>
         <tr>
             <th>Nombre</th>
@@ -22,16 +23,14 @@
             <td>{{producto.cantidadTotal}}</td>
             <td>{{producto.cantidadAlmacen}}</td>
             <td>{{producto.cantidadTienda}}</td>
-            <td><button><a routerLink="../{{producto.id}}" (click)="ver()">Ver</a></button>
-                <button><a routerLink="../{{producto.id}}">Modificar</a></button></td>
+            <td><a routerLink="../{{producto.id}}" (click)="ver()" class="btn btn-block btn-info mr-3 mb-1">Ver</a>
+                <a routerLink="../{{producto.id}}" class="btn btn-block btn-primary">Modificar</a></td>
         </tr>
     </tbody>
 </table>
 
-<div class="container">
-    <div class="row">
-        <div class="col-2"><button id="crear-producto"><a routerLink="../">Crear</a></button></div>
-        <div class="col"></div>
-        <div class="col-2"><button id="volver-listado-producto" (click)="volver()">Volver</button></div>
-    </div>
+
+<a routerLink="../" id="crear-producto" class="btn btn-primary float-left">Crear</a>
+<button id="volver-listado-producto" (click)="volver()" class="btn btn-secondary float-right">Volver</button>
+
 </div>
