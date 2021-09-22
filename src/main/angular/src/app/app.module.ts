@@ -19,6 +19,7 @@ import { ModalModificarComponent } from './modal/modal-modificar/modal-modificar
 import { ModalVolverComponent } from './modal/modal-volver/modal-volver.component';
 import { ModalBajaComponent } from './modal/modal-baja/modal-baja.component';
 import { ModalAltaComponent } from './modal/modal-alta/modal-alta.component';
+import { IndexComponent } from './index/index.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ModalAltaComponent } from './modal/modal-alta/modal-alta.component';
     ModalModificarComponent,
     ModalVolverComponent,
     ModalBajaComponent,
-    ModalAltaComponent
+    ModalAltaComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
