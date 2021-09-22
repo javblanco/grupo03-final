@@ -1,0 +1,23 @@
+<div class="jumbotron"><h2 id="titulo-tipo-producto-maestro">Listado de tipos de productos</h2></div>
+<div class="container">
+<table id="tabla-tipo-producto" class="table mb-5">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tipo of tipos">
+            <td>{{tipo.nombre}}</td>
+            <td><a routerLink="../{{tipo.id}}" (click)="ver()" class="btn btn-info mr-3 mb-1">Ver</a>
+                <a routerLink="../{{tipo.id}}" class="btn btn-primary">Modificar</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<a routerLink="../" id="crear-tipo" class="btn btn-primary float-left">Crear</a>
+<button id="volver-listado-tipo" (click)="volver()" class="btn btn-secondary float-right">Volver</button>
+
+</div>
+

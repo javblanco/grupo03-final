@@ -1,0 +1,63 @@
+<div class="jumbotron"><div *ngIf="!lectura">
+    <div *ngIf="!tipo.id && !lectura; then crear_tipo else modificar_tipo">será ignorado</div> 
+    <ng-template #crear_tipo><h2>Crear tipo de producto</h2></ng-template>
+    <ng-template #modificar_tipo><h2>Modificar tipo de producto</h2></ng-template>
+</div>
+<h2 *ngIf="lectura">Información del tipo de producto</h2>
+</div>
+
+<div class="container">
+    <form #tipoForm="ngForm">
+<label for="tipo-nombre">Nombre: </label>
+<input id="tipo-nombre" type="text" [(ngModel)]="tipo.nombre" #tipo_nombre="ngModel" name="tipo_nombre" [disabled]="lectura" class="form-control" required minlength="2" maxlength="70"> <br>
+
+<div *ngIf="tipo_nombre.invalid && (tipo_nombre.dirty || tipo_nombre.touched)"
+    class="alert alert-warning">
+
+  <div *ngIf="tipo_nombre.errors?.required">
+    El nombre es un campo obligatorio.
+  </div>
+  <div *ngIf="tipo_nombre.errors?.minlength">
+    El nombre debe tener al menos 2 carácteres.
+  </div>
+
+  <div *ngIf="tipo_nombre.errors?.maxlength">
+    El nombre admite hasta 70 carácteres.
+  </div>
+
+</div>
+
+<label for="tipo-descripcion">Descripción: </label>
+<textarea id="tipo-descripcion" name="tipo_descripcion" #tipo_descripcion="ngModel" [(ngModel)]="tipo.descripcion" [disabled]="lectura" class="form-control" required maxlength="256"></textarea><br>
+
+<div *ngIf="tipo_descripcion.invalid && (tipo_descripcion.dirty || tipo_descripcion.touched)"  class="alert alert-warning">
+
+  <div *ngIf="tipo_descripcion.errors?.required">
+    La descripción es un campo obligatorio.
+  </div>
+
+  <div *ngIf="tipo_descripcion.errors?.maxlength">
+    El descripción admite hasta 256 carácteres
+  </div>
+
+</div>
+
+<div *ngIf="!tipoForm.form.valid" class="alert alert-warning">
+  Debe rellenar el formulario.
+</div>
+
+<button id="tipo-guardar" (click)="guardar()" [disabled]="lectura || !tipoForm.form.valid" class="btn btn-primary float-left mr-5">Guardar</button> 
+<span *ngIf="tipo.id">
+
+<span *ngIf="!lectura">
+    <span *ngIf="tipo.activo; then desactivar_tipo else activar_tipo">será ignorado</span> 
+        <ng-template #desactivar_tipo><button id="tipo-activo" class="btn btn-danger" [disabled]="!tipoForm.form.valid" (click)="cambiarActivo()">Baja</button></ng-template> 
+        <ng-template #activar_tipo><button id="tipo-activo" class="btn btn-success" [disabled]="!tipoForm.form.valid" (click)="cambiarActivo()">Alta</button></ng-template> 
+    </span>
+</span>
+<button id="tipo-volver" (click)="volver()" class="btn btn-secondary float-right">Volver</button>
+
+</form>
+<div *ngIf="mensaje" id="feedback" class="mt-5 alert alert-success">{{mensaje}}</div>
+
+</div>
