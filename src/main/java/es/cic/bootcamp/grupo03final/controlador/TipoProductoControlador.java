@@ -49,9 +49,9 @@ import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 		}
 		
 		@PutMapping
-		public TipoProductoDto modificar(@RequestBody TipoProductoDto tipoProducto) {
+		public void modificar(@RequestBody TipoProductoDto tipoProducto) {
 			LOGGER.info("modifica un registro de tipo de producto");
-			return tipoProductoServicio.modificar(tipoProducto);
+			tipoProductoServicio.modificar(tipoProducto);
 		}
 		
 		//@DeleteMapping

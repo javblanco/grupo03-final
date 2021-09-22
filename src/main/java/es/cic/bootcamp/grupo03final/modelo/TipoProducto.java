@@ -1,6 +1,8 @@
 package es.cic.bootcamp.grupo03final.modelo;
 
 import java.util.Objects;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,8 +26,8 @@ public class TipoProducto {
 	@Length(max=256)
 	private String descripcion;
 	
-	@Value("true")
-	private boolean activo;
+	@Column(columnDefinition = "boolean default true")
+	private boolean activo = true;
 	
 	public TipoProducto() {
 		
@@ -77,7 +79,7 @@ public class TipoProducto {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(activo, descripcion, id, nombre);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -89,8 +91,7 @@ public class TipoProducto {
 		if (getClass() != obj.getClass())
 			return false;
 		TipoProducto other = (TipoProducto) obj;
-		return Objects.equals(activo, other.activo) && Objects.equals(descripcion, other.descripcion)
-				&& Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre);
+		return Objects.equals(id, other.id) ;
 	}
 
 }
