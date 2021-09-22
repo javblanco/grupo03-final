@@ -37,6 +37,8 @@ describe('Creación y listado de productos', () => {
    it('Vuelve al listado y comprueba que haya un registro más', () => {
      cy.get('button#producto-volver').click();
  
+     cy.get('button#modal-boton-volver').click();
+
      cy.url().should('contain', 'list');
  
      cy.get('table#tabla-producto tbody tr').should('have.length', numeroRegistros + 1);
