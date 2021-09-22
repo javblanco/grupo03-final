@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ModalModificarComponent } from './modal-modificar.component';
 
@@ -8,7 +9,11 @@ describe('ModalModificarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalModificarComponent ]
+      declarations: [ ModalModificarComponent ],
+      providers: [
+        {provide: NgbActiveModal}
+      ]
+          
     })
     .compileComponents();
   });
