@@ -24,6 +24,7 @@ import { TransferenciaComponent } from './transferencia/transferencia.component'
 import { ModalTransferirComponent } from './modal/modal-transferir/modal-transferir.component';
 import { ModalDevolverComponent } from './modal/modal-devolver/modal-devolver.component';
 import { ModalReponerComponent } from './modal/modal-reponer/modal-reponer.component';
+import { ValidacionTransferenciaDirective } from './validacion-transferencia.directive';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ModalReponerComponent } from './modal/modal-reponer/modal-reponer.compo
     TransferenciaComponent,
     ModalTransferirComponent,
     ModalDevolverComponent,
-    ModalReponerComponent
+    ModalReponerComponent,
+    ValidacionTransferenciaDirective
   ],
   imports: [
     BrowserModule,

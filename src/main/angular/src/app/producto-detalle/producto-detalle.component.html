@@ -49,7 +49,7 @@
     <div *ngIf="producto_tienda.errors?.required">
         La cantidad en almacén es un campo obligatorio.
       </div>
-      <div *ngIf="producto_almacen.errors?.required">
+      <div *ngIf="producto_almacen.errors?.min">
         No se admiten números negativos
       </div>
 </div>
@@ -60,13 +60,13 @@
     <div *ngIf="producto_tienda.errors?.required">
         La cantidad en tienda es un campo obligatorio.
       </div>
-      <div *ngIf="producto_tienda.errors?.required">
+      <div *ngIf="producto_tienda.errors?.min">
         No se admiten números negativos
       </div>
 </div>
 
 <div *ngIf="!productoForm.form.valid" class="alert alert-warning">
-  Debe rellenar el formulario.
+  Debe completar el formulario.
 </div>
 
 <button id="producto-guardar" (click)="guardar()" [disabled]="lectura || !productoForm.form.valid" class="btn btn-primary float-left mr-5">Guardar</button> 

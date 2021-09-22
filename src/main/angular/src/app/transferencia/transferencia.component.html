@@ -11,21 +11,41 @@
     </option>
 </select>
 
+<form #transferenciaForm="ngForm" appValidacionTransferencia>
 <label>Cantidad de stock en el almácen:</label>
-<input type="number" class="form-control" id="cantidad-almacen" [ngModel]="productoT.cantidadUnidadesAlmacen" disabled><br>
+<input type="number" class="form-control" id="cantidad-almacen" name="cantidad_almacen" [ngModel]="productoT.cantidadUnidadesAlmacen" disabled><br>
 <label>Cantidad de stock en la tienda:</label>
-<input type="number" class="form-control" id="cantidad-almacen" [ngModel]="productoT.cantidadUnidadesTienda" disabled><br>
+<input type="number" class="form-control" id="cantidad-tienda" name="cantidad_tienda" [ngModel]="productoT.cantidadUnidadesTienda" disabled><br>
 
 <label>Cantidad de stock a <span *ngIf="accion == 1">traspasar</span>
   <span *ngIf="accion == 2">devolver</span>
   <span *ngIf="accion == 3">reponer</span>:</label>
-<input type="number" class="form-control" id="cantidad-almacen" [(ngModel)]="cantidad"><br>
+<input type="number" class="form-control" id="cantidad-traspasar" name="cantidad_traspasar" #cantidad_traspasar="ngModel" [disabled]="!productoT.id"  [(ngModel)]="cantidad" min="0"><br>
 
-<button id="producto-guardar" (click)="transferir()"  class="btn btn-primary float-left">
+<input type="hidden" name="accion" [(ngModel)]="accion"/>
+<div *ngIf="cantidad_traspasar.errors?.min" class="alert alert-danger">
+No se admiten números negativos
+</div>
+<div *ngIf="invalido">
+<div *ngIf="transferenciaForm.errors?.errorCantidad" class="alert alert-danger">
+  Introduzca una cantidad.
+</div>
+
+<div *ngIf="transferenciaForm.errors?.errorTransferencia" class="alert alert-danger">
+  No hay unidades suficientes en el almacén
+</div>
+
+<div *ngIf="transferenciaForm.errors?.errorDevolucion" class="alert alert-danger">
+  No hay unidades suficientes en la tienda
+</div>
+</div>
+
+<button id="producto-guardar" (click)="transferir(transferenciaForm.invalid)" type="submit" [disabled]="!productoT.id" class="btn btn-primary float-left">
   <span *ngIf="accion == 1">Traspasar</span>
   <span *ngIf="accion == 2">Devolver</span>
   <span *ngIf="accion == 3">Reponer</span>
 </button> 
 <button id="producto-volver" (click)="volver()" class="btn btn-secondary float-right">Volver</button>
+</form>
 </div>
     

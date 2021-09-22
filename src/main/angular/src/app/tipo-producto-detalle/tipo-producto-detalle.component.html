@@ -43,7 +43,7 @@
 </div>
 
 <div *ngIf="!tipoForm.form.valid && !lectura" class="alert alert-warning">
-  Debe rellenar el formulario.
+  Debe completar el formulario.
 </div>
 
 <button id="tipo-guardar" (click)="guardar()" [disabled]="lectura || !tipoForm.form.valid" class="btn btn-primary float-left mr-5">Guardar</button> 

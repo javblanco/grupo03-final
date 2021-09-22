@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ModalTransferirComponent } from '../modal/modal-transferir/modal-transferir.component';
 import { ModalVolverComponent } from '../modal/modal-volver/modal-volver.component';
 import { Producto } from '../model/producto';
@@ -22,6 +22,8 @@ export class TransferenciaComponent implements OnInit {
   productoT = <Producto>{};
 
   productoSeleccionado = <Producto>{};
+
+  invalido = false;
 
   constructor(private productoService: ProductoService,
     private transferenciaService: TransferenciaService,
@@ -51,39 +53,43 @@ export class TransferenciaComponent implements OnInit {
     this.productoT = producto;
   }
 
-  transferir() : void {
-    if(this.accion==1) {
-      let modalRef = this.modalService.open(ModalTransferirComponent);
-      modalRef.componentInstance.cantidad = this.cantidad;
-      modalRef.componentInstance.nombre = this.productoT.nombre;
+  transferir(invalido: boolean | null) : void {
+    if(invalido) {
+      this.invalido = true;
+    } else {
+      this.ejecutarAccion();
+    }
+    
+  }
 
-      modalRef.result.then(
+  ejecutarAccion(): void {
+    if(this.accion==1) {
+      this.crearModal().result.then(
         () => this.transferenciaService.transferir(this.productoT.id, this.cantidad)
         .subscribe(() => this.seleccionarProducto())
       );
       
     } else if(this.accion ==2) {
-      let modalRef = this.modalService.open(ModalTransferirComponent);
-      modalRef.componentInstance.cantidad = this.cantidad;
-      modalRef.componentInstance.nombre = this.productoT.nombre;
-
-      modalRef.result.then(
+      this.crearModal().result.then(
         () => this.transferenciaService.devolver(this.productoT.id, this.cantidad)
         .subscribe(() => this.seleccionarProducto())
       );
 
     } else if(this.accion == 3) {
-      let modalRef = this.modalService.open(ModalTransferirComponent);
-      modalRef.componentInstance.cantidad = this.cantidad;
-      modalRef.componentInstance.nombre = this.productoT.nombre;
-
-      modalRef.result.then(
+      this.crearModal().result.then(
         () => this.transferenciaService.reponer(this.productoT.id, this.cantidad)
         .subscribe(() => this.seleccionarProducto())
       );
     }
   }
 
+crearModal(): NgbModalRef {
+  let modalRef = this.modalService.open(ModalTransferirComponent);
+  modalRef.componentInstance.cantidad = this.cantidad;
+  modalRef.componentInstance.nombre = this.productoT.nombre;
+
+  return modalRef;
+}
   seleccionarProducto(): void {
     this.productoService.getProducto(this.productoT.id)
     .subscribe(producto =>{ 
@@ -91,5 +97,7 @@ export class TransferenciaComponent implements OnInit {
       this.productoT = producto;
       this.cantidad = 0;
     });
+
+    this.invalido = false;
   }
 }
