@@ -12,8 +12,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Locale;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,9 +35,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import es.cic.bootcamp.grupo03final.conversor.ProductoConversor;
 import es.cic.bootcamp.grupo03final.dto.ProductoDto;
 import es.cic.bootcamp.grupo03final.modelo.Producto;
 import es.cic.bootcamp.grupo03final.modelo.TipoProducto;
+import es.cic.bootcamp.grupo03final.repositorio.ProductoRepositorio;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -47,6 +54,11 @@ public class ProductocontroladorIntegracionTest {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	@Autowired 
+	private ProductoRepositorio productoRepositorio;
+	
+	@Autowired
+	private ProductoConversor productoConversor;
 	
 	@Autowired
 	private ObjectMapper mapper;
@@ -57,24 +69,24 @@ public class ProductocontroladorIntegracionTest {
 	}
 	
 
-	private Producto generarProductoConDto() {
+	private Producto generarProducto() {
 		Producto p = new Producto();
-		p.setNombre("balón");
+		p.setNombre("balon");
 		p.setMarca("puma");
 		p.setModelo("xr22");
-		p.setDescripción("Balón de futbol 11 ideal para niños y adultos.");
+		p.setDescripción("Balon de futbol 11 ideal para adultos.");
 		p.setCantidadUnidadesAlmacen(0);
 		p.setCantidadUnidadesTienda(0);
 		
 		return p;
 	}
 	
-	private ProductoDto generarDto() {
+	private ProductoDto generarProductoDto() {
 		ProductoDto dto = new ProductoDto();
-		dto.setNombre("balón");
+		dto.setNombre("balon");
 		dto.setMarca("puma");
 		dto.setModelo("xr22");
-		dto.setDescripción("Balón de futbol 11 ideal para niños y adultos.");
+		dto.setDescripción("Balon de futbol 11 ideal para adultos.");
 		
 		dto.setCantidadUnidadesAlmacen(0);
 		dto.setCantidadUnidadesTienda(0);
@@ -86,7 +98,7 @@ public class ProductocontroladorIntegracionTest {
 	
 	@Test
 	void testCreateValidacionesCorrectas() throws Exception {
-		Producto productoResultado = generarProductoConDto();
+		Producto productoResultado = generarProducto();
 
 		TipoProducto tipoP = new TipoProducto();
 		tipoP.setNombre("Balon");
@@ -96,7 +108,7 @@ public class ProductocontroladorIntegracionTest {
 		
 		productoResultado.setTipoProducto(tipoP);
 		
-		ProductoDto dto = generarDto();
+		ProductoDto dto = generarProductoDto();
 		dto.setIdTipoProducto(tipoP.getId());
 		
 		MockHttpServletRequestBuilder request =
@@ -125,6 +137,32 @@ public class ProductocontroladorIntegracionTest {
 		.ignoringFields("id")
 		.isEqualTo(productoResultado);
 				
+	}
+
+	@Test
+	void testListar() throws Exception {
+		Producto producto = generarProducto();
+		Producto producto1 = generarProducto();
+		
+		productoRepositorio.saveAll(List.of(producto, producto1));
+		
+		MockHttpServletRequestBuilder request = get("/api/producto")
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		String respuesta = mapper.writeValueAsString(productoConversor.entityListToDtoList(List.of(producto, producto1)));
+		
+		respuesta = respuesta.substring(1, respuesta.length()-1);
+		
+		MvcResult result = mvc.perform(request)
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(1))))
+		.andReturn();
+		
+		String resultado = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
+		
+		assertTrue(resultado.contains(respuesta), "Error en el listado de productos, no son los esperados");
 	}
 
 	
