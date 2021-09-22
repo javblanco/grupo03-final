@@ -9,7 +9,7 @@ import { TipoProducto } from '../model/tipoProducto';
 })
 export class TipoProductoService {
 
-  url = `${environment.host}/api/tipoProducto`;
+  url = `${environment.host}/api/tipo-producto`;
 
   lectura = false;
 

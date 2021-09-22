@@ -67,10 +67,15 @@ export class ProductoDetalleComponent implements OnInit {
   }
 
   volver(): void {
-    this.modalService.open(ModalVolverComponent)
-    .result.then(
-      () => this.location.back()
-    );
+    if(this.lectura) {
+      this.location.back();
+    } else {
+      this.modalService.open(ModalVolverComponent)
+      .result.then(
+        () => this.location.back()
+      );
+    }
+    
   }
 
   crear(): void {
