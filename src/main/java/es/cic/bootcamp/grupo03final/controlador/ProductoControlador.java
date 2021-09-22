@@ -60,8 +60,8 @@ public class ProductoControlador {
 	}
 
 	
-	@PostMapping("/transferir")
-	public void transferirTienda(@PathVariable(required = true, name = "id") Long id, @RequestBody int cantidad) {
+	@PostMapping("/transferir/{id}")
+	public void transferirTienda(@PathVariable(required = true, name = "id") Long id, @RequestBody Integer cantidad) {
 		
 		//Trasnferir la cantidad indicada del producto indicado del tipo indicado
 		// del almacen a la tienda
@@ -70,7 +70,7 @@ public class ProductoControlador {
 		
 	}
 	
-	@PostMapping("/devolver")
+	@PostMapping("/devolver/{id}")
 	public void devolverAlmacen(@PathVariable(required = true, name = "id") Long id, @RequestBody int cantidad) {
 		
 		//Trasnferir la cantidad indicada del producto indicado del tipo indicado
@@ -81,7 +81,7 @@ public class ProductoControlador {
 		
 	}
 	
-	@PostMapping("/pedir")
+	@PostMapping("/pedir/{id}")
 	public void pedirAlmacen(@PathVariable(required = true, name = "id") Long id, @RequestBody int cantidad) {
 		
 		//Pedir nuevo stock al almacen.

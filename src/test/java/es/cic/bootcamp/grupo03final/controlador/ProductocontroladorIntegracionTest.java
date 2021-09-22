@@ -218,19 +218,102 @@ public class ProductocontroladorIntegracionTest {
 	@Test
 	void testLeer() throws Exception {
 		Producto p = generarProducto();
+
+		productoRepositorio.save(p);
+
+		MockHttpServletRequestBuilder request = get("/api/producto/{id}", p.getId()).accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON);
+
+		mvc.perform(request).andDo(print()).andExpect(status().isOk());
+	}
+
+	@Test
+	void testDevolver() throws Exception {
+		
+		Producto p = generarProducto();
+		p.setCantidadUnidadesAlmacen(10);
+		p.setCantidadUnidadesTienda(6);
 		
 		productoRepositorio.save(p);
 		
-				MockHttpServletRequestBuilder request = get("/api/producto/{id}", p.getId())
+		Long id = p.getId();
+		int cantidad = 4;
+		
+		MockHttpServletRequestBuilder request = post("/api/producto/devolver/{id}", id)
 				.accept(MediaType.APPLICATION_JSON)
-				.contentType(MediaType.APPLICATION_JSON);
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(cantidad));
 		
 		mvc.perform(request)
 		.andDo(print())
 		.andExpect(status().isOk());
+		
+		
+		int cantidadTiendaNueva = productoRepositorio.findById(p.getId()).get().getCantidadUnidadesTienda();
+		int cantidadAlmacenNueva = productoRepositorio.findById(p.getId()).get().getCantidadUnidadesAlmacen();
+		
+		assertEquals(cantidadTiendaNueva,2, "No se ha restado la cantidad correctamente de la tienda.");
+		assertEquals(cantidadAlmacenNueva,14,  "No se ha sumado la cantidad correctamente del almacen.");
 	}
+	
+	@Test
+	void testTransferir() throws Exception {
+		
+		Producto p = generarProducto();
+		p.setCantidadUnidadesAlmacen(10);
+		p.setCantidadUnidadesTienda(6);
+		
+		productoRepositorio.save(p);
+		
+		Long id = p.getId();
+		int cantidad = 4;
+		
+		MockHttpServletRequestBuilder request = post("/api/producto/transferir/{id}", id)
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(cantidad));
+		
+		mvc.perform(request)
+		.andDo(print())
+		.andExpect(status().isOk());
+		
+		
+		int cantidadTiendaNueva = productoRepositorio.findById(p.getId()).get().getCantidadUnidadesTienda();
+		int cantidadAlmacenNueva = productoRepositorio.findById(p.getId()).get().getCantidadUnidadesAlmacen();
+		
+		assertEquals( cantidadAlmacenNueva, 6, "No se ha restado la cantidad correctamente del almacen.");
+		assertEquals(cantidadTiendaNueva , 10,  "No se ha sumado la cantidad correctamente de la tienda.");
+		
+	}
+	
+	@Test
+	void testPedir() throws Exception {
+		
+		Producto p = generarProducto();
+		p.setCantidadUnidadesAlmacen(10);
+		
+		productoRepositorio.save(p);
+		
+		Long id = p.getId();
+		Integer cantidad = 20;
+		
+		MockHttpServletRequestBuilder request = post("/api/producto/pedir/{id}", id)
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(mapper.writeValueAsString(cantidad));
+		
+		//TODO Falta meter en el json la cantidad...
+		
+		mvc.perform(request)
+		.andDo(print())
+		.andExpect(status().isOk());
+		
 
-
+		int cantidadAlmacenNueva = productoRepositorio.findById(p.getId()).get().getCantidadUnidadesAlmacen();
+		
+		assertEquals( cantidadAlmacenNueva, 30, "No se ha sumado la cantidad correctamente del almacen.");
+		
+	}
 
 
 	
