@@ -113,6 +113,9 @@ public class ProductoServicio {
 				productoSeleccionado
 						.setCantidadUnidadesTienda(productoSeleccionado.getCantidadUnidadesTienda() - cantidad);
 
+productoRepositorio.save(productoSeleccionado);
+
+
 			} else {
 
 				// Si el numero introducido es mayor que las cantidades en tienda ERROR
@@ -140,6 +143,7 @@ public class ProductoServicio {
 						.setCantidadUnidadesAlmacen(productoSeleccionado.getCantidadUnidadesAlmacen() - cantidad);
 				productoSeleccionado
 						.setCantidadUnidadesTienda(productoSeleccionado.getCantidadUnidadesTienda() + cantidad);
+productoRepositorio.save(productoSeleccionado);
 
 			} else {
 
@@ -166,6 +170,7 @@ public class ProductoServicio {
 
 				productoSeleccionado
 						.setCantidadUnidadesAlmacen(productoSeleccionado.getCantidadUnidadesAlmacen() + cantidad);
+productoRepositorio.save(productoSeleccionado);
 
 			} else {
 

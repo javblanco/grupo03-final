@@ -27,6 +27,9 @@ public class ProductoConversor {
 			producto.setTipoProducto(tipoProducto);
 		}
 
+		producto.setCantidadUnidadesAlmacen(dto.getCantidadUnidadesAlmacen());
+		producto.setCantidadUnidadesTienda(dto.getCantidadUnidadesTienda());
+
 		return producto;
 
 	}
@@ -44,7 +47,8 @@ public class ProductoConversor {
 		dto.setNombre(p.getNombre());
 
 		if (p.getTipoProducto() != null) {
-			dto.setId(p.getTipoProducto().getId());
+			dto.setIdTipoProducto(p.getTipoProducto().getId());
+			dto.setNombreTipoProducto(p.getTipoProducto().getNombre());
 			dto.setTipoProducto(p.getTipoProducto());
 		}
 
