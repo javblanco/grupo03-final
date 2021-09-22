@@ -41,7 +41,7 @@ class TipoProductoRepositorioTest{
 
 	assertNotNull(resultado.getId(), "La clave primaria no deberia ser nula");
 	TipoProducto tipoProductoEnBBDD = entityManager.find(TipoProducto.class, resultado.getId());
-	assertEquals(resultado, tipoProductoEnBBDD, "No se ha guardado el vehiculo");
+	assertEquals(resultado, tipoProductoEnBBDD, "No se ha guardado el tipo de producto");
 	}
 	
 	@Test
