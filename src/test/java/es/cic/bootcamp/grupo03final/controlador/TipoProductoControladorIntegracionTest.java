@@ -136,12 +136,13 @@ public class TipoProductoControladorIntegracionTest {
 	@Test
 	void testModificar() throws Exception {
 		TipoProducto tipoProducto = generarTipoProducto();
-
-		tipoProductoRepositorio.save(tipoProducto);
-
-		TipoProducto tipoProductoAModificar = generarTipoProducto();
-		tipoProductoAModificar.setNombre("Secadora");
 		
+		tipoProductoRepositorio.save(tipoProducto);
+		
+		TipoProducto tipoProductoAModificar = generarTipoProducto();
+		tipoProductoAModificar.setId(tipoProducto.getId());
+		tipoProductoAModificar.setNombre("Secadora");
+
 		String body = mapper.writeValueAsString(tipoProductoConversor.entityToDto(tipoProducto));
 		
 		MockHttpServletRequestBuilder request = put("/api/tipo-producto")
@@ -152,18 +153,72 @@ public class TipoProductoControladorIntegracionTest {
 		MvcResult result = mvc.perform(request)
 				.andDo(print())
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.id", notNullValue()))
 				.andReturn();
 		
-		String resultado = result.getResponse().getContentAsString();
+		TipoProducto resultado = tipoProductoRepositorio.findById(tipoProducto.getId()).get();
 		
-		assertEquals(body, resultado, "El registro no se ha modificado correctamente.");
+		assertEquals(tipoProductoAModificar, resultado, "El registro no se ha modificado correctamente.");
 
 	}
 	
+	@Test
+	void testDarDeBaja() throws Exception {
+		TipoProducto tipoProducto = generarTipoProducto();
+		
+		tipoProductoRepositorio.save(tipoProducto);
+		
+		TipoProducto tipoProductoADarDeBaja = generarTipoProducto();
+		tipoProductoADarDeBaja.setId(tipoProducto.getId());
+		tipoProductoADarDeBaja.setActivo(false);;
 
+		String body = mapper.writeValueAsString(tipoProductoConversor.entityToDto(tipoProducto));
+		
 
+		MockHttpServletRequestBuilder request = post("/api/tipo-producto/desactivar/{id}",tipoProducto.getId())
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(body);
+		
+		MvcResult result = mvc.perform(request)
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andReturn();
+		
+		TipoProducto resultado = tipoProductoRepositorio.findById(tipoProducto.getId()).get();
+		
+		assertEquals(tipoProductoADarDeBaja, resultado, "El registro no se ha dado de baja correctamente");
+
+	}
 	
+	@Test
+	void testDarDeAlta() throws Exception {
+		TipoProducto tipoProducto = generarTipoProducto2();
+		
+		tipoProductoRepositorio.save(tipoProducto);
+		
+		TipoProducto tipoProductoADarDeAlta = generarTipoProducto2();
+		tipoProductoADarDeAlta.setId(tipoProducto.getId());
+		tipoProductoADarDeAlta.setActivo(true);
+
+		String body = mapper.writeValueAsString(tipoProductoConversor.entityToDto(tipoProducto));
+		
+
+		MockHttpServletRequestBuilder request = post("/api/tipo-producto/activar/{id}",tipoProducto.getId())
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(body);
+		
+		MvcResult result = mvc.perform(request)
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andReturn();
+		
+		TipoProducto resultado = tipoProductoRepositorio.findById(tipoProducto.getId()).get();
+		
+		assertEquals(tipoProductoADarDeAlta, resultado, "El registro no se ha modificado correctamente.");
+
+	}
+
 	private TipoProducto generarTipoProducto() {
 		TipoProducto tipoProducto = new TipoProducto();
 		tipoProducto.setNombre("Lavadora");

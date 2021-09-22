@@ -54,7 +54,7 @@ public class TipoProductoServicio {
 		return tipoProductoConversor.entityListToDtoList(lista);
 	}
 
-	public TipoProductoDto modificar(TipoProductoDto dto) {
+	public void modificar(TipoProductoDto dto) {
 
 		if (dto.getId() == null) {
 			throw new TipoProductoExcepcion(MENSAJE_EXCEPCION);
@@ -62,7 +62,7 @@ public class TipoProductoServicio {
 
 		TipoProducto tipoProducto = tipoProductoConversor.dtoToEntity(dto);
 
-		return tipoProductoConversor.entityToDto(tipoProductoRepositorio.save(tipoProducto));
+		tipoProductoConversor.entityToDto(tipoProductoRepositorio.save(tipoProducto));
 	}
 
 //public void borrar(Long id) {
