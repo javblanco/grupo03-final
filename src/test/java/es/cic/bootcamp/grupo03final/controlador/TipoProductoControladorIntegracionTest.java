@@ -110,7 +110,6 @@ public class TipoProductoControladorIntegracionTest {
 		TipoProducto tipoProducto1 = generarTipoProducto();
 		TipoProducto tipoProducto2 = generarTipoProducto2();
 
-		
 		tipoProductoRepositorio.saveAll(List.of(tipoProducto1, tipoProducto2));
 		
 		MockHttpServletRequestBuilder request = get("/api/tipo-producto")

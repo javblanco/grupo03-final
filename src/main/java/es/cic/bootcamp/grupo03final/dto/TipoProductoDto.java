@@ -31,5 +31,4 @@ public class TipoProductoDto {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
 }
