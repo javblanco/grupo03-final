@@ -48,8 +48,11 @@ export class TipoProductoDetalleComponent implements OnInit {
   }
 
   volver(): void {
-    let modalRef = this.modalService.open(ModalVolverComponent);
-    modalRef.result.then(() => this.location.back());
+    if(this.lectura) {
+      this.location.back();
+    } else {
+      this.modalService.open(ModalVolverComponent).result.then(() => this.location.back());
+    }
   }
 
   guardar(): void {
@@ -62,14 +65,20 @@ export class TipoProductoDetalleComponent implements OnInit {
 
   crear(): void {
     this.tipoService.crearTipo(this.tipo)
-    .subscribe(id => this.tipo.id = id);
-    this.mensaje = 'Se ha creado el registro';
+    .subscribe(id => {
+      this.tipo.id = id;
+      this.mensaje = 'Se ha creado el registro';
+      this.tipo.activo = true;
+    });
+    
   }
 
   modificar(): void {
     this.tipoService.modificarTipo(this.tipo)
-    .subscribe();
-    this.mensaje = 'Se ha modificado el registro';
+    .subscribe(() => {
+      this.mensaje = 'Se ha modificado el registro'
+    });
+    ;
   }
 
   cambiarActivo(): void {
@@ -89,15 +98,15 @@ export class TipoProductoDetalleComponent implements OnInit {
   darBaja(): void {
     this.tipo.activo = false;
     this.tipoService.modificarTipo(this.tipo)
-    .subscribe();
-    this.mensaje = 'Se ha dado el registro de baja';
+    .subscribe(() => this.mensaje = 'Se ha dado el registro de baja');
+    
   }
 
   darAlta(): void {
     this.tipo.activo = true;
     this.tipoService.modificarTipo(this.tipo)
-    .subscribe();
-    this.mensaje = 'Se ha dado el registro de alta';
+    .subscribe(()=> this.mensaje = 'Se ha dado el registro de alta');
+    
   }
  
 }

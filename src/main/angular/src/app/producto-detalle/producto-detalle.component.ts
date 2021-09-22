@@ -81,14 +81,17 @@ export class ProductoDetalleComponent implements OnInit {
   crear(): void {
     this.productoService.crearProducto(this.producto)
     .subscribe(
-      producto => this.producto.id = producto
+      producto => {
+        this.producto.id = producto;
+        this.mensaje='Se ha creado el producto';
+      }
     );
-    this.mensaje='Se ha creado el producto';
+    
   }
 
   modificar() :void {
     this.productoService.modificarProducto(this.producto)
-    .subscribe();
-    this.mensaje='Se ha modificado el producto';
+    .subscribe(() => this.mensaje='Se ha modificado el producto');
+    
   }
 }

@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalTransferirComponent } from '../modal/modal-transferir/modal-transferir.component';
 import { ModalVolverComponent } from '../modal/modal-volver/modal-volver.component';
 import { Producto } from '../model/producto';
 import { ProductoService } from '../service/producto.service';
@@ -52,15 +53,34 @@ export class TransferenciaComponent implements OnInit {
 
   transferir() : void {
     if(this.accion==1) {
-      this.transferenciaService.transferir(this.productoT.id, this.cantidad)
-      .subscribe(() => this.seleccionarProducto());
+      let modalRef = this.modalService.open(ModalTransferirComponent);
+      modalRef.componentInstance.cantidad = this.cantidad;
+      modalRef.componentInstance.nombre = this.productoT.nombre;
+
+      modalRef.result.then(
+        () => this.transferenciaService.transferir(this.productoT.id, this.cantidad)
+        .subscribe(() => this.seleccionarProducto())
+      );
+      
     } else if(this.accion ==2) {
-      this.transferenciaService.devolver(this.productoT.id, this.cantidad)
-      .subscribe(() => this.seleccionarProducto());
+      let modalRef = this.modalService.open(ModalTransferirComponent);
+      modalRef.componentInstance.cantidad = this.cantidad;
+      modalRef.componentInstance.nombre = this.productoT.nombre;
+
+      modalRef.result.then(
+        () => this.transferenciaService.devolver(this.productoT.id, this.cantidad)
+        .subscribe(() => this.seleccionarProducto())
+      );
 
     } else if(this.accion == 3) {
-      this.transferenciaService.reponer(this.productoT.id, this.cantidad)
-      .subscribe(() => this.seleccionarProducto());
+      let modalRef = this.modalService.open(ModalTransferirComponent);
+      modalRef.componentInstance.cantidad = this.cantidad;
+      modalRef.componentInstance.nombre = this.productoT.nombre;
+
+      modalRef.result.then(
+        () => this.transferenciaService.reponer(this.productoT.id, this.cantidad)
+        .subscribe(() => this.seleccionarProducto())
+      );
     }
   }
 
