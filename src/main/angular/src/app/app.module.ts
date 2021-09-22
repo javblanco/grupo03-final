@@ -20,6 +20,7 @@ import { ModalVolverComponent } from './modal/modal-volver/modal-volver.componen
 import { ModalBajaComponent } from './modal/modal-baja/modal-baja.component';
 import { ModalAltaComponent } from './modal/modal-alta/modal-alta.component';
 import { IndexComponent } from './index/index.component';
+import { TransferenciaComponent } from './transferencia/transferencia.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { IndexComponent } from './index/index.component';
     ModalVolverComponent,
     ModalBajaComponent,
     ModalAltaComponent,
-    IndexComponent
+    IndexComponent,
+    TransferenciaComponent
   ],
   imports: [
     BrowserModule,
@@ -41,9 +43,6 @@ import { IndexComponent } from './index/index.component';
     FormsModule,
     HttpClientModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService, { dataEncapsulation: false }
-)
   ],
   providers: [],
   bootstrap: [AppComponent]

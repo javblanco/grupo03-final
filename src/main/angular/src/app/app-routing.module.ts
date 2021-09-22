@@ -9,6 +9,7 @@ import { TransferenciaComponent } from './transferencia/transferencia.component'
 
 const routes: Routes = [
   {path: 'index', component: IndexComponent},
+  {path: '', redirectTo: 'index', pathMatch: 'full'},
   {path: 'tipo-producto/listar', component: TipoProductoMaestroComponent},
   {path: 'tipo-producto', component: TipoProductoDetalleComponent},
   {path: 'tipo-producto/:id', component: TipoProductoDetalleComponent},
