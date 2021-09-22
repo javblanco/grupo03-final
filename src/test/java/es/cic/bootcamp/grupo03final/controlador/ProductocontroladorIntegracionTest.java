@@ -18,6 +18,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hamcrest.core.IsEqual;
@@ -164,6 +166,36 @@ public class ProductocontroladorIntegracionTest {
 		
 		assertTrue(resultado.contains(respuesta), "Error en el listado de productos, no son los esperados");
 	}
+	
+	@Test
+	void testModificar() throws Exception {
+		Producto producto = generarProducto();
+		
+		productoRepositorio.save(producto);
+		
+		Producto productoModificar = generarProducto();
+		productoModificar.setId(producto.getId());
+		productoModificar.setNombre("Pelota");
+		
+		String body = mapper.writeValueAsString(productoConversor.entityToDto(producto));
+		
+		MockHttpServletRequestBuilder request = put("/api/producto")
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(body);
+		
+		MvcResult result = mvc.perform(request)
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andReturn();
+		
+		Producto resultado = productoRepositorio.findById(producto.getId()).get();
+		
+		assertEquals(productoModificar, resultado, "El registro no se ha modificado correctamente.");
+
+	}
+
+
 
 	
 	
