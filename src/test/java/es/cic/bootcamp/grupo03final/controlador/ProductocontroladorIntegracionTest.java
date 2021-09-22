@@ -99,7 +99,7 @@ public class ProductocontroladorIntegracionTest {
 
 	
 	@Test
-	void testCreateValidacionesCorrectas() throws Exception {
+	void testCrear() throws Exception {
 		Producto productoResultado = generarProducto();
 
 		TipoProducto tipoP = new TipoProducto();
@@ -194,6 +194,42 @@ public class ProductocontroladorIntegracionTest {
 		assertEquals(productoModificar, resultado, "El registro no se ha modificado correctamente.");
 
 	}
+	
+	@Test
+	void testBorrar() throws Exception {
+		Producto p = generarProducto();
+		
+		Producto productoABorrar = productoRepositorio.save(p);
+		
+		MockHttpServletRequestBuilder request = delete("/api/producto/{id}", productoABorrar.getId())
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		mvc.perform(request)
+		.andDo(print())
+		.andExpect(status().isOk());
+		
+		
+		Optional<Producto> alquilerEnBBDD = productoRepositorio.findById(productoABorrar.getId());
+		
+		assertTrue(alquilerEnBBDD.isEmpty(), "No se ha borrado el registro");
+	}
+
+	@Test
+	void testLeer() throws Exception {
+		Producto p = generarProducto();
+		
+		productoRepositorio.save(p);
+		
+				MockHttpServletRequestBuilder request = get("/api/producto/{id}", p.getId())
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		mvc.perform(request)
+		.andDo(print())
+		.andExpect(status().isOk());
+	}
+
 
 
 
