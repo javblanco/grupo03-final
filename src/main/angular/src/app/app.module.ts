@@ -15,6 +15,10 @@ import { TipoProductoMaestroComponent } from './tipo-producto-maestro/tipo-produ
 import { TipoProductoDetalleComponent } from './tipo-producto-detalle/tipo-producto-detalle.component';
 import { ProductoMaestroComponent } from './producto-maestro/producto-maestro.component';
 import { ProductoDetalleComponent } from './producto-detalle/producto-detalle.component';
+import { ModalModificarComponent } from './modal/modal-modificar/modal-modificar.component';
+import { ModalVolverComponent } from './modal/modal-volver/modal-volver.component';
+import { ModalBajaComponent } from './modal/modal-baja/modal-baja.component';
+import { ModalAltaComponent } from './modal/modal-alta/modal-alta.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { ProductoDetalleComponent } from './producto-detalle/producto-detalle.co
     TipoProductoMaestroComponent,
     TipoProductoDetalleComponent,
     ProductoMaestroComponent,
-    ProductoDetalleComponent
+    ProductoDetalleComponent,
+    ModalModificarComponent,
+    ModalVolverComponent,
+    ModalBajaComponent,
+    ModalAltaComponent
   ],
   imports: [
     BrowserModule,

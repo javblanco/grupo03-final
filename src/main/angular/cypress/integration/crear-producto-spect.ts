@@ -13,7 +13,7 @@ describe('Creación y listado de productos', () => {
    });
  
    it('Va a la página de creación y da de alta un nuevo registro', () => {
-     cy.get('button#crear-producto').click();
+     cy.get('#crear-producto').click();
  
      cy.url().should('not.contain', 'list');
  
@@ -37,6 +37,8 @@ describe('Creación y listado de productos', () => {
    it('Vuelve al listado y comprueba que haya un registro más', () => {
      cy.get('button#producto-volver').click();
  
+     cy.get('button#modal-boton-volver').click();
+
      cy.url().should('contain', 'list');
  
      cy.get('table#tabla-producto tbody tr').should('have.length', numeroRegistros + 1);
