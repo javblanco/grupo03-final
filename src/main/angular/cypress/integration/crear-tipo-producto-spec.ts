@@ -13,7 +13,7 @@ describe('Creación y listado del tipo de productos', () => {
   });
 
   it('Va a la página de creación y da de alta un nuevo registro', () => {
-    cy.get('button#crear-tipo').click();
+    cy.get('#crear-tipo').click();
 
     cy.url().should('not.contain', 'list');
 
