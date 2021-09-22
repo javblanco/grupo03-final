@@ -104,26 +104,20 @@ public class Producto {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(cantidadUnidadesAlmacen, cantidadUnidadesTienda, descripción, id, marca, modelo, nombre,
-				tipoProducto);
-	}
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Producto other = (Producto) obj;
-		return cantidadUnidadesAlmacen == other.cantidadUnidadesAlmacen
-				&& cantidadUnidadesTienda == other.cantidadUnidadesTienda
-				&& Objects.equals(descripción, other.descripción) && Objects.equals(id, other.id)
-				&& Objects.equals(marca, other.marca) && Objects.equals(modelo, other.modelo)
-				&& Objects.equals(nombre, other.nombre) && Objects.equals(tipoProducto, other.tipoProducto);
-	}
-
-	
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Producto other = (Producto) obj;
+        return Objects.equals(id, other.id) ;
+    }
+    
 }

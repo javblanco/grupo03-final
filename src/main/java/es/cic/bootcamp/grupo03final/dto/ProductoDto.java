@@ -2,6 +2,7 @@ package es.cic.bootcamp.grupo03final.dto;
 
 import java.util.Objects;
 
+import es.cic.bootcamp.grupo03final.modelo.Producto;
 import es.cic.bootcamp.grupo03final.modelo.TipoProducto;
 
 public class ProductoDto {
@@ -130,27 +131,20 @@ public class ProductoDto {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(cantidadUnidadesAlmacen, cantidadUnidadesTienda, descripción, id, idTipoProducto, marca,
-				modelo, nombre, nombreTipoProducto, tipoProducto);
-	}
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ProductoDto other = (ProductoDto) obj;
-		return cantidadUnidadesAlmacen == other.cantidadUnidadesAlmacen
-				&& cantidadUnidadesTienda == other.cantidadUnidadesTienda
-				&& Objects.equals(descripción, other.descripción) && Objects.equals(id, other.id)
-				&& Objects.equals(idTipoProducto, other.idTipoProducto) && Objects.equals(marca, other.marca)
-				&& Objects.equals(modelo, other.modelo) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(nombreTipoProducto, other.nombreTipoProducto)
-				&& Objects.equals(tipoProducto, other.tipoProducto);
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ProductoDto other = (ProductoDto) obj;
+        return Objects.equals(id, other.id) ;
+    }
 
 }
