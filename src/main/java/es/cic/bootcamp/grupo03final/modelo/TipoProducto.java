@@ -27,7 +27,7 @@ public class TipoProducto {
 	private String descripcion;
 	
 	@Column(columnDefinition = "boolean default true")
-	private boolean activo;
+	private boolean activo = true;
 
 	@PrePersist
 	private void prePersist() {
