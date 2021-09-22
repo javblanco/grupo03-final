@@ -1,4 +1,7 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalVolverComponent } from '../modal/modal-volver/modal-volver.component';
 import { Producto } from '../model/producto';
 import { ProductoService } from '../service/producto.service';
 import { TransferenciaService } from '../service/transferencia.service';
@@ -10,22 +13,63 @@ import { TransferenciaService } from '../service/transferencia.service';
 })
 export class TransferenciaComponent implements OnInit {
 
-  accion = 1;
-
+  accion: number;
   productos: Producto[] = [];
 
-  producto = <Producto>{};
+  cantidad: number;
 
-  constructor(private service: TransferenciaService,
-    private productoService: ProductoService) { }
+  productoT = <Producto>{};
 
-  ngOnInit(): void {
-    this.accion = this.service.accion;
-    this.getListadoProducto();
+  productoSeleccionado = <Producto>{};
+
+  constructor(private productoService: ProductoService,
+    private transferenciaService: TransferenciaService,
+    private modalService: NgbModal,
+    private location: Location ) { 
+    this.accion = this.transferenciaService.accion;
+    this.cantidad = 0;
   }
 
-  getListadoProducto(): void {
+  ngOnInit(): void {
+    this.listarProductos();
+  }
+
+  listarProductos(): void {
     this.productoService.getProductos()
-    .subscribe(productos => this.productos = productos);
+    .subscribe(productos => this.productos = productos)
+  }
+
+  volver() : void {
+    this.modalService.open(ModalVolverComponent)
+    .result.then(
+      () => this.location.back()
+    );
+  }
+
+  cargarProducto(producto: Producto) {
+    this.productoT = producto;
+  }
+
+  transferir() : void {
+    if(this.accion==1) {
+      this.transferenciaService.transferir(this.productoT.id, this.cantidad)
+      .subscribe(() => this.seleccionarProducto());
+    } else if(this.accion ==2) {
+      this.transferenciaService.devolver(this.productoT.id, this.cantidad)
+      .subscribe(() => this.seleccionarProducto());
+
+    } else if(this.accion == 3) {
+      this.transferenciaService.reponer(this.productoT.id, this.cantidad)
+      .subscribe(() => this.seleccionarProducto());
+    }
+  }
+
+  seleccionarProducto(): void {
+    this.productoService.getProducto(this.productoT.id)
+    .subscribe(producto =>{ 
+      this.listarProductos();
+      this.productoT = producto;
+      this.cantidad = 0;
+    });
   }
 }

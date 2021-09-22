@@ -1,12 +1,31 @@
-<div class="jumbotron">
-    <h2 *ngIf="accion === 1">Pasar productos de almacén a la tienda</h2>
-    <h2 *ngIf="accion === 2">Devolver productos de la tienda al almacén</h2>
-    <h2 *ngIf="accion === 3">Reponer productos en almacén</h2>
-</div>
+<div class="jumbotron"><h2 *ngIf="accion == 1">Pasar productos de almacén a la tienda</h2>
+  <h2 *ngIf="accion == 2">Devolver productos de la tienda al almacén</h2>
+  <h2 *ngIf="accion == 3">Reponer productos en almacén</h2></div>
 
 <div class="container">
-    <select id="lista-producto" class="form-control">
-        <option value="undefined" disabled selected>Seleccione una opción</option>
-        <option *ngFor="let producto of productos" value="producto.id">{{producto.nombre}}</option>
-    </select><br>
+  <label>Seleccione el producto: </label>
+<select class="form-control mb-5"  [(ngModel)]="productoSeleccionado">
+    <option [ngValue] disabled selected >Seleccione una opción</option>
+  <option  *ngFor="let producto of productos" [ngValue]="producto.id" (click)="cargarProducto(producto)">
+    {{producto.nombre}}
+    </option>
+</select>
+
+<label>Cantidad de stock en el almácen:</label>
+<input type="number" class="form-control" id="cantidad-almacen" [ngModel]="productoT.cantidadUnidadesAlmacen" disabled><br>
+<label>Cantidad de stock en la tienda:</label>
+<input type="number" class="form-control" id="cantidad-almacen" [ngModel]="productoT.cantidadUnidadesTienda" disabled><br>
+
+<label>Cantidad de stock a <span *ngIf="accion == 1">traspasar</span>
+  <span *ngIf="accion == 2">devolver</span>
+  <span *ngIf="accion == 3">reponer</span>:</label>
+<input type="number" class="form-control" id="cantidad-almacen" [(ngModel)]="cantidad"><br>
+
+<button id="producto-guardar" (click)="transferir()"  class="btn btn-primary float-left">
+  <span *ngIf="accion == 1">Traspasar</span>
+  <span *ngIf="accion == 2">Devolver</span>
+  <span *ngIf="accion == 3">Reponer</span>
+</button> 
+<button id="producto-volver" (click)="volver()" class="btn btn-secondary float-right">Volver</button>
 </div>
+    
