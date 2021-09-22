@@ -2,6 +2,9 @@ package es.cic.bootcamp.grupo03final.controlador;
 
 import java.util.List;
 import java.util.logging.Logger;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.cic.bootcamp.grupo03final.dto.TipoProductoDto;
 import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
-
 
 	@RestController
 	@RequestMapping("/api/tipo-producto")
@@ -36,7 +38,7 @@ import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 		}
 		
 		@PostMapping
-		public TipoProductoDto crear(@RequestBody TipoProductoDto tipoProducto) {
+		public TipoProductoDto crear(@Valid @RequestBody TipoProductoDto tipoProducto) {
 			LOGGER.info("crea un registro de tipo de producto");
 			return tipoProductoServicio.crear(tipoProducto);
 		}
@@ -49,7 +51,7 @@ import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 		}
 		
 		@PutMapping
-		public void modificar(@RequestBody TipoProductoDto tipoProducto) {
+		public void modificar(@Valid @RequestBody TipoProductoDto tipoProducto) {
 			LOGGER.info("modifica un registro de tipo de producto");
 			tipoProductoServicio.modificar(tipoProducto);
 		}
