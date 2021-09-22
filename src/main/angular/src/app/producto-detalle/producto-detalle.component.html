@@ -65,6 +65,10 @@
       </div>
 </div>
 
+<div *ngIf="!productoForm.form.valid" class="alert alert-warning">
+  Debe rellenar el formulario.
+</div>
+
 <button id="producto-guardar" (click)="guardar()" [disabled]="lectura || !productoForm.form.valid" class="btn btn-primary float-left mr-5">Guardar</button> 
 <button id="producto-volver" (click)="volver()" class="btn btn-secondary float-right">Volver</button>
 </form>

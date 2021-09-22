@@ -1,6 +1,11 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalAltaComponent } from '../modal/modal-alta/modal-alta.component';
+import { ModalBajaComponent } from '../modal/modal-baja/modal-baja.component';
+import { ModalModificarComponent } from '../modal/modal-modificar/modal-modificar.component';
+import { ModalVolverComponent } from '../modal/modal-volver/modal-volver.component';
 import { TipoProducto } from '../model/tipoProducto';
 import { TipoProductoService } from '../service/tipo-producto.service';
 import { TipoProductoMaestroComponent } from '../tipo-producto-maestro/tipo-producto-maestro.component';
@@ -24,7 +29,8 @@ export class TipoProductoDetalleComponent implements OnInit {
 
   constructor(private tipoService: TipoProductoService,
     private location: Location,
-    private routes: ActivatedRoute) { }
+    private routes: ActivatedRoute,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.getTipo();
@@ -42,12 +48,13 @@ export class TipoProductoDetalleComponent implements OnInit {
   }
 
   volver(): void {
-    this.location.back();
+    let modalRef = this.modalService.open(ModalVolverComponent);
+    modalRef.result.then(() => this.location.back());
   }
 
   guardar(): void {
     if(this.tipo.id) {
-      this.modificar();
+      this.modalService.open(ModalModificarComponent).result.then(() => this.modificar());
     } else {
       this.crear();
     }
@@ -68,18 +75,29 @@ export class TipoProductoDetalleComponent implements OnInit {
   cambiarActivo(): void {
     if(this.tipo.id) {
       if(this.tipo.activo) {
-        this.tipo.activo = false;
-        this.tipoService.modificarTipo(this.tipo)
-        .subscribe();
-        this.mensaje = 'Se ha dado el registro de baja';
+        this.modalService.open(ModalBajaComponent).result.then(
+          () => this.darBaja()
+        );
       } else {
-        this.tipo.activo = true;
-        this.tipoService.modificarTipo(this.tipo)
-        .subscribe();
-        this.mensaje = 'Se ha dado el registro de alta';
+        this.modalService.open(ModalAltaComponent).result.then(
+          () => this.darAlta()
+        )       
       }
     }
   }
 
+  darBaja(): void {
+    this.tipo.activo = false;
+    this.tipoService.modificarTipo(this.tipo)
+    .subscribe();
+    this.mensaje = 'Se ha dado el registro de baja';
+  }
+
+  darAlta(): void {
+    this.tipo.activo = true;
+    this.tipoService.modificarTipo(this.tipo)
+    .subscribe();
+    this.mensaje = 'Se ha dado el registro de alta';
+  }
  
 }

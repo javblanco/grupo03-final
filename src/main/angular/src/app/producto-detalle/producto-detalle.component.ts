@@ -1,6 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModificarComponent } from '../modal/modal-modificar/modal-modificar.component';
+import { ModalVolverComponent } from '../modal/modal-volver/modal-volver.component';
 import { Producto } from '../model/producto';
 import { TipoProducto } from '../model/tipoProducto';
 import { ProductoService } from '../service/producto.service';
@@ -25,7 +28,8 @@ export class ProductoDetalleComponent implements OnInit {
     private productoService: ProductoService,
     private tipoService: TipoProductoService,
     private router: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -53,20 +57,33 @@ export class ProductoDetalleComponent implements OnInit {
 
   guardar(): void {
     if(this.producto.id) {
-      this.productoService.modificarProducto(this.producto)
-      .subscribe();
-      this.mensaje='Se ha modificado el producto';
-    } else {
-      this.productoService.crearProducto(this.producto)
-      .subscribe(
-        producto => this.producto.id = producto
+      this.modalService.open(ModalModificarComponent)
+      .result.then(
+        () => this.modificar()
       );
-      this.mensaje='Se ha creado el producto';
+    } else {
+      this.crear();
     }
   }
 
   volver(): void {
-    this.location.back();
+    this.modalService.open(ModalVolverComponent)
+    .result.then(
+      () => this.location.back()
+    );
   }
 
+  crear(): void {
+    this.productoService.crearProducto(this.producto)
+    .subscribe(
+      producto => this.producto.id = producto
+    );
+    this.mensaje='Se ha creado el producto';
+  }
+
+  modificar() :void {
+    this.productoService.modificarProducto(this.producto)
+    .subscribe();
+    this.mensaje='Se ha modificado el producto';
+  }
 }

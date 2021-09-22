@@ -33,8 +33,8 @@ export class ProductoService {
     return this.http.post<number>(this.url, producto, this.options);
   }
 
-  modificarProducto(producto: Producto): Observable<never> {
-    return this.http.put<never>(this.url, producto, this.options);
+  modificarProducto(producto: Producto): Observable<any> {
+    return this.http.put(this.url, producto, this.options);
   }
 
   activarSoloLectura(): void {
