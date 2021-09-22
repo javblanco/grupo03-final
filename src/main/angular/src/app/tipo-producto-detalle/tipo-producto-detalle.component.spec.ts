@@ -1,6 +1,7 @@
 import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TipoProducto } from '../model/tipoProducto';
 import { TipoProductoService } from '../service/tipo-producto.service';
 
@@ -14,9 +15,11 @@ describe('TipoProductoDetalleComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ TipoProductoDetalleComponent ],
       imports: [RouterTestingModule,
-      FormsModule],
+      FormsModule,
+      ],
       providers: [
         { provide: ComponentFixtureAutoDetect, useValue: true },
+        {provide: NgbActiveModal},
         {
           provide: TipoProductoService,
             useValue: jasmine.createSpyObj('TipoProductoService', ['getTipo'])

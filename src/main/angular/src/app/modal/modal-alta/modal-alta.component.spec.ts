@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ModalAltaComponent } from './modal-alta.component';
 
@@ -8,7 +9,11 @@ describe('ModalAltaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalAltaComponent ]
+      declarations: [ ModalAltaComponent ],
+      providers: [
+        {provide: NgbActiveModal}
+      ]
+          
     })
     .compileComponents();
   });

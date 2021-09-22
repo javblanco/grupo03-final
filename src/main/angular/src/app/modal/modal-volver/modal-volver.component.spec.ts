@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ModalVolverComponent } from './modal-volver.component';
 
@@ -8,7 +9,11 @@ describe('ModalVolverComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalVolverComponent ]
+      declarations: [ ModalVolverComponent, ],
+      providers: [
+        {provide: NgbActiveModal}
+      ]
+          
     })
     .compileComponents();
   });
