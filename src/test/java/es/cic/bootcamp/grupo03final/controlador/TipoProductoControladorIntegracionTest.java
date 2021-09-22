@@ -61,7 +61,7 @@ public class TipoProductoControladorIntegracionTest {
 	
 	@Test
 	void testLeer() throws Exception {
-		TipoProducto tipo = tipoProductoRepositorio.save(new TipoProducto("producto1", "descp"));
+		TipoProducto tipo = tipoProductoRepositorio.save(new TipoProducto("producto1", "descripcion1"));
 				MockHttpServletRequestBuilder request = get("/api/tipo-producto/{id}", tipo.getId())
 				.accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON);
@@ -108,7 +108,7 @@ public class TipoProductoControladorIntegracionTest {
 	@Test
 	void testListar() throws Exception {
 		TipoProducto tipoProducto1 = generarTipoProducto();
-		TipoProducto tipoProducto2 = generarTipoProducto();
+		TipoProducto tipoProducto2 = generarTipoProducto2();
 
 		
 		tipoProductoRepositorio.saveAll(List.of(tipoProducto1, tipoProducto2));
@@ -161,8 +161,18 @@ public class TipoProductoControladorIntegracionTest {
 
 	}
 	
+
+
+	
 	private TipoProducto generarTipoProducto() {
 		TipoProducto tipoProducto = new TipoProducto();
+		tipoProducto.setNombre("Lavadora");
+		tipoProducto.setDescripcion("Electrodomestico para lavar la ropa.");
+		return tipoProducto;
+	}
+	private TipoProducto generarTipoProducto2() {
+		TipoProducto tipoProducto = new TipoProducto();
+		tipoProducto.setActivo(false);
 		tipoProducto.setNombre("Lavadora");
 		tipoProducto.setDescripcion("Electrodomestico para lavar la ropa.");
 		return tipoProducto;
