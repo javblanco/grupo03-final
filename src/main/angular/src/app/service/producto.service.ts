@@ -49,4 +49,14 @@ export class ProductoService {
   desactivarSoloLectura(): void {
     this.lectura = false;
   }
+
+  getProductosAlmacen(): Observable<Producto[]> {
+    let almacenUrl = `${this.url}/almacen`;
+    return this.http.get<Producto[]>(almacenUrl);
+  }
+
+  getProductosTienda(): Observable<Producto[]> {
+    let tiendaUrl = `${this.url}/tienda`;
+    return this.http.get<Producto[]>(tiendaUrl);
+  }
 }

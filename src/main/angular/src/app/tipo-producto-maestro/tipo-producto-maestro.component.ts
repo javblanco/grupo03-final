@@ -14,6 +14,9 @@ export class TipoProductoMaestroComponent implements OnInit {
 
   visible = false;
 
+  filtro = 1;
+  filtrado = false;
+
   constructor(private tipoService: TipoProductoService,
     private location: Location) { }
 
@@ -24,7 +27,10 @@ export class TipoProductoMaestroComponent implements OnInit {
 
   getTipos(): void {
     this.tipoService.getTiposActivos()
-    .subscribe(tipos => this.tipos = tipos);
+    .subscribe(tipos => {
+      this.tipos = tipos;
+      this.filtrado = false;
+    });
   }
 
   volver(): void {
@@ -33,5 +39,17 @@ export class TipoProductoMaestroComponent implements OnInit {
 
   ver(): void {
     this.tipoService.activarSoloLectura();
+  }
+
+  filtrar(): void {
+    if(this.filtro === 1) {
+      this.getTipos();
+    } else if(this.filtro === 2) {
+      this.tipoService.getTipos()
+    .subscribe(tipos => {
+      this.tipos = tipos;
+      this.filtrado = true;
+    });
+    }
   }
 }

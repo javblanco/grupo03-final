@@ -12,6 +12,10 @@ export class ProductoMaestroComponent implements OnInit {
 
   productos: Producto[] = [];
 
+  filtro = 1;
+
+  filtrado = 1;
+
   constructor(private service: ProductoService,
     private location: Location) { }
 
@@ -23,7 +27,10 @@ export class ProductoMaestroComponent implements OnInit {
   getProductos(): void {
     this.service.getProductos()
     .subscribe(
-      productos => this.productos = productos
+      productos => {
+      this.productos = productos;
+      this.filtrado = 1;
+      }
     )
   }
 
@@ -33,5 +40,23 @@ export class ProductoMaestroComponent implements OnInit {
 
   ver(): void {
     this.service.activarSoloLectura();
+  }
+
+  filtrar(): void {
+    if(this.filtro === 1) {
+      this.getProductos();
+    } else if(this.filtro === 2) {
+      this.service.getProductosAlmacen()
+      .subscribe(productos => {
+        this.productos = productos;
+        this.filtrado = 2;
+      });
+    } else if(this.filtro === 3) {
+      this.service.getProductosTienda()
+      .subscribe(productos => {
+        this.productos = productos;
+        this.filtrado = 3;
+      });
+    }
   }
 }
