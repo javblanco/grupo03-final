@@ -101,5 +101,31 @@ public class TipoProductoServicio {
 				throw new TipoProductoExcepcion("Ya estaba dado de alta el producto");
 			}
 		}
+	
+	public List<TipoProductoDto> listarActivos() {
+		
+		List<TipoProducto> listaCompleta = new ArrayList<>();
+		List<TipoProducto> listaActivos = new ArrayList<>();
+		List<TipoProductoDto> listaDto = new ArrayList<>();
+
+		tipoProductoRepositorio.findAll().forEach(listaCompleta::add);
+		
+		for (int i=0; i< listaCompleta.size(); i++) {
+			
+			TipoProducto p = listaCompleta.get(i);
+			
+			if ( p.isActivo() == true) {
+				
+				listaActivos.add(p);
+			}
+		}
+		
+		listaActivos.forEach(p -> listaDto.add(tipoProductoConversor.entityToDto(p)));
+
+		return listaDto;
+		
+	}
+
+	
 
 }

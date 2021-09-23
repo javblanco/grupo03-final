@@ -27,6 +27,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
@@ -217,6 +218,36 @@ public class TipoProductoControladorIntegracionTest {
 		assertEquals(tipoProductoADarDeAlta, resultado, "El registro no se ha modificado correctamente.");
 
 	}
+	
+	@Test
+	void testListarActivos() throws Exception {
+		TipoProducto producto = generarTipoProducto();
+		TipoProducto producto1 = generarTipoProducto();
+		TipoProducto producto2 = generarTipoProducto();
+		
+		producto2.setActivo(false);
+	
+		tipoProductoRepositorio.saveAll(List.of(producto, producto1, producto2));
+		
+		MockHttpServletRequestBuilder request = get("/api/tipo-producto/tipo/activo")
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		String respuesta = mapper.writeValueAsString(tipoProductoConversor.entityListToDtoList(List.of(producto, producto1)));
+		
+		respuesta = respuesta.substring(1, respuesta.length()-1);
+		
+		MvcResult result = mvc.perform(request)
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(1))))
+		.andReturn();
+		
+		String resultado = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
+		
+		assertTrue(resultado.contains(respuesta), "Error en el listado de productos, no son los esperados");
+	}
+
 
 	private TipoProducto generarTipoProducto() {
 		TipoProducto tipoProducto = new TipoProducto();

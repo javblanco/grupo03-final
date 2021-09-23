@@ -73,4 +73,11 @@ import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 			LOGGER.info("activo un tipo de producto");
 			tipoProductoServicio.darDeAlta(id);
 		}
+		
+		@GetMapping("/tipo/activo")
+		public List<TipoProductoDto> getProductosTipoActivo() {
+			LOGGER.info("listo los tipos de producto activos");
+			return tipoProductoServicio.listarActivos();
+		}
+
 	}
