@@ -253,5 +253,51 @@ public class ProductoServicio {
 		return listaDto;
 		
 	}
+
+	public List<ProductoDto> getProductosEnStockAlmacen() {
+		List<Producto> listaCompleta = new ArrayList<>();
+		List<Producto> listaEnStock = new ArrayList<>();
+		List<ProductoDto> listaDto = new ArrayList<>();
+
+		productoRepositorio.findAll().forEach(listaCompleta::add);
+		
+		for (int i=0; i<listaCompleta.size(); i++) {
+			
+			Producto p = listaCompleta.get(i);
+			int stockDisponibleAlmacen = p.getCantidadUnidadesAlmacen();
+			
+			if ( stockDisponibleAlmacen > 0) {
+				listaEnStock.add(p);	
+			}
+		}
+		
+		listaEnStock.forEach(p -> listaDto.add(productoConversor.entityToDto(p)));
+
+		return listaDto;
+		
+	}
+
+	public List<ProductoDto> getProductosEnStockTienda() {
+		List<Producto> listaCompleta = new ArrayList<>();
+		List<Producto> listaEnStock = new ArrayList<>();
+		List<ProductoDto> listaDto = new ArrayList<>();
+
+		productoRepositorio.findAll().forEach(listaCompleta::add);
+		
+		for (int i=0; i<listaCompleta.size(); i++) {
+			
+			Producto p = listaCompleta.get(i);
+			int stockDisponibleTienda = p.getCantidadUnidadesTienda();
+			
+			if ( stockDisponibleTienda > 0) {
+				listaEnStock.add(p);	
+			}
+		}
+		
+		listaEnStock.forEach(p -> listaDto.add(productoConversor.entityToDto(p)));
+
+		return listaDto;
+		
+	}
 }
 
