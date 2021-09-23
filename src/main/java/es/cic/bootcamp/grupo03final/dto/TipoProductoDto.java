@@ -1,11 +1,23 @@
 package es.cic.bootcamp.grupo03final.dto;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 public class TipoProductoDto {
 
 	private Long id;
+	
+	@Length(max=70, min=2)
+	@NotNull(message = "{!}-->DEBE RELLENAR EL CAMPO DE NOMBRE.")
 	private String nombre;
+	
+	@Length(max=256)
 	private String descripcion;
-	private boolean activo;
+	
+	@Column(columnDefinition = "boolean default true")
+	private boolean activo = true;
 	
 	public Long getId() {
 		return id;
@@ -31,5 +43,4 @@ public class TipoProductoDto {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
 }
