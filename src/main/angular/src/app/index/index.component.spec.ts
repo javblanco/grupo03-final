@@ -1,5 +1,6 @@
 import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NgbAccordion, NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { of } from 'rxjs';
 import { TransferenciaService } from '../service/transferencia.service';
 
@@ -12,9 +13,11 @@ describe('IndexComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ IndexComponent ],
-      imports:[RouterTestingModule],
+      imports:[RouterTestingModule,
+        NgbAccordionModule],
       providers: [
         { provide: ComponentFixtureAutoDetect, useValue: true },
+        {provide: NgbAccordion},
         {
           provide: TransferenciaService,
             useValue: jasmine.createSpyObj('TransferenciaService', ['transferir', 'devolver', 'reponer'])
