@@ -56,17 +56,17 @@
 
 <label for="producto-stock-tienda">Cantidad en tienda: </label>
 <input id="producto-stock-tienda" type="number" [(ngModel)]="producto.cantidadUnidadesTienda" #producto_tienda="ngModel" name="producto_tienda" class="form-control" [disabled]="lectura" required min="0"><br>
-<div *ngIf="producto_tienda.invalid && (producto_tienda.dirty || producto_tienda.touched)" class="alert alert-warning">
-    <div *ngIf="producto_tienda.errors?.required">
+<div *ngIf="producto_tienda.invalid && (producto_tienda.dirty || producto_tienda.touched)">
+    <div *ngIf="producto_tienda.errors?.required" class="alert alert-warning">
         La cantidad en tienda es un campo obligatorio.
       </div>
-      <div *ngIf="producto_tienda.errors?.min">
+      <div *ngIf="producto_tienda.errors?.min" class="alert alert-warning">
         No se admiten números negativos
       </div>
 </div>
 
-<div *ngIf="!productoForm.form.valid" class="alert alert-warning">
-  Debe completar el formulario.
+<div *ngIf="!productoForm.form.valid && !lectura" class="alert alert-warning">
+  Debe completar el formulario correctamente.
 </div>
 
 <button id="producto-guardar" (click)="guardar()" [disabled]="lectura || !productoForm.form.valid" class="btn btn-primary float-left mr-5">Guardar</button> 

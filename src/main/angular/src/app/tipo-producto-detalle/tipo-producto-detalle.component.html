@@ -1,5 +1,5 @@
 <div class="jumbotron"><div *ngIf="!lectura">
-    <div *ngIf="!tipo.id && !lectura; then crear_tipo else modificar_tipo">será ignorado</div> 
+    <div *ngIf="creacion && !lectura; then crear_tipo else modificar_tipo">será ignorado</div> 
     <ng-template #crear_tipo><h2>Crear tipo de producto</h2></ng-template>
     <ng-template #modificar_tipo><h2>Modificar tipo de producto</h2></ng-template>
 </div>

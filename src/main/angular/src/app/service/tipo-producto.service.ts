@@ -29,12 +29,24 @@ export class TipoProductoService {
     return this.http.get<TipoProducto>(idUrl);
   }
 
-  crearTipo(tipo: TipoProducto): Observable<number> {
-    return this.http.post<number>(this.url, tipo, this.options);
+  crearTipo(tipo: TipoProducto): Observable<TipoProducto> {
+    return this.http.post<TipoProducto>(this.url, tipo, this.options);
   }
 
-  modificarTipo(tipo: TipoProducto): Observable<never> {
-    return this.http.put<never>(this.url, tipo, this.options);
+  modificarTipo(tipo: TipoProducto): Observable<any> {
+    return this.http.put<any>(this.url, tipo, this.options);
+  }
+
+  activarTipo(id: number) {
+    const idUrl = `${this.url}/activar/${id}`;
+
+    return this.http.post(idUrl, this.options);
+  }
+
+  desactivarTipo(id: number) {
+    const idUrl = `${this.url}/desactivar/${id}`;
+
+    return this.http.post(idUrl, this.options);
   }
 
   activarSoloLectura(): void {

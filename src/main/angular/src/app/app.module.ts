@@ -42,7 +42,7 @@ import { ValidacionTransferenciaDirective } from './validacion-transferencia.dir
     ModalTransferirComponent,
     ModalDevolverComponent,
     ModalReponerComponent,
-    ValidacionTransferenciaDirective
+    ValidacionTransferenciaDirective,
   ],
   imports: [
     BrowserModule,

@@ -4,14 +4,16 @@
 
 <div class="container">
   <label>Seleccione el producto: </label>
-<select class="form-control mb-5"  [(ngModel)]="productoSeleccionado">
+<select class="form-control mb-5"  [(ngModel)]="productoSeleccionado" (ngModelChange)="cargarProducto($event)">
     <option [ngValue] disabled selected >Seleccione una opción</option>
-  <option  *ngFor="let producto of productos" [ngValue]="producto.id" (click)="cargarProducto(producto)">
+  <option  *ngFor="let producto of productos" [ngValue]="producto" [selected]="productoSeleccionado == producto">
     {{producto.nombre}}
     </option>
 </select>
 
 <form #transferenciaForm="ngForm" appValidacionTransferencia>
+
+ <h3>{{productoT.nombre}}</h3>
 <label>Cantidad de stock en el almácen:</label>
 <input type="number" class="form-control" id="cantidad-almacen" name="cantidad_almacen" [ngModel]="productoT.cantidadUnidadesAlmacen" disabled><br>
 <label>Cantidad de stock en la tienda:</label>

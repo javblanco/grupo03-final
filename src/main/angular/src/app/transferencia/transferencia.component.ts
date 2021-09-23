@@ -66,19 +66,31 @@ export class TransferenciaComponent implements OnInit {
     if(this.accion==1) {
       this.crearModal().result.then(
         () => this.transferenciaService.transferir(this.productoT.id, this.cantidad)
-        .subscribe(() => this.seleccionarProducto())
+        .subscribe(() =>  {
+          this.seleccionarProducto();
+          this.productoT= <Producto>{};
+          this.productoSeleccionado= <Producto>{};
+        })
       );
       
     } else if(this.accion ==2) {
       this.crearModal().result.then(
         () => this.transferenciaService.devolver(this.productoT.id, this.cantidad)
-        .subscribe(() => this.seleccionarProducto())
+        .subscribe(() => {
+          this.seleccionarProducto();
+          this.productoT= <Producto>{};
+          this.productoSeleccionado= <Producto>{};
+        })
       );
 
     } else if(this.accion == 3) {
       this.crearModal().result.then(
         () => this.transferenciaService.reponer(this.productoT.id, this.cantidad)
-        .subscribe(() => this.seleccionarProducto())
+        .subscribe(() =>  {
+          this.seleccionarProducto();
+          this.productoT= <Producto>{};
+          this.productoSeleccionado= <Producto>{};
+        })
       );
     }
   }
@@ -95,6 +107,7 @@ crearModal(): NgbModalRef {
     .subscribe(producto =>{ 
       this.listarProductos();
       this.productoT = producto;
+      this.productoSeleccionado = producto;
       this.cantidad = 0;
     });
 
