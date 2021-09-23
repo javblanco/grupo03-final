@@ -1,4 +1,5 @@
 import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { TipoProductoService } from '../service/tipo-producto.service';
@@ -13,7 +14,8 @@ describe('TipoProductoMaestroComponent', () => {
   beforeEach( () => {
      TestBed.configureTestingModule({
       declarations: [ TipoProductoMaestroComponent ],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule,
+      FormsModule],
       providers: [
         { provide: ComponentFixtureAutoDetect, useValue: true },
         {

@@ -1,4 +1,5 @@
 import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { ProductoService } from '../service/producto.service';
@@ -12,7 +13,8 @@ describe('ProductoMaestroComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ProductoMaestroComponent ],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule,
+      FormsModule],
       providers: [
         { provide: ComponentFixtureAutoDetect, useValue: true },
         {

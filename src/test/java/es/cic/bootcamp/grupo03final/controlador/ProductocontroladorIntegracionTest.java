@@ -1,41 +1,37 @@
 package es.cic.bootcamp.grupo03final.controlador;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.hamcrest.core.IsEqual;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.cic.bootcamp.grupo03final.conversor.ProductoConversor;
 import es.cic.bootcamp.grupo03final.dto.ProductoDto;
@@ -43,8 +39,6 @@ import es.cic.bootcamp.grupo03final.modelo.Producto;
 import es.cic.bootcamp.grupo03final.modelo.TipoProducto;
 import es.cic.bootcamp.grupo03final.repositorio.ProductoRepositorio;
 import es.cic.bootcamp.grupo03final.repositorio.TipoProductoRepositorio;
-
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 
 @SpringBootTest
@@ -195,10 +189,9 @@ public class ProductocontroladorIntegracionTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(body);
 		
-		MvcResult result = mvc.perform(request)
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andReturn();
+		mvc.perform(request)
+		.andDo(print())
+		.andExpect(status().isOk());
 		
 		Producto resultado = productoRepositorio.findById(producto.getId()).get();
 		
@@ -312,8 +305,6 @@ public class ProductocontroladorIntegracionTest {
 				.accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(cantidad));
-		
-		//TODO Falta meter en el json la cantidad...
 		
 		mvc.perform(request)
 		.andDo(print())

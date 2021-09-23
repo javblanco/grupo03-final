@@ -1,44 +1,32 @@
 package es.cic.bootcamp.grupo03final.controlador;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static org.hamcrest.Matchers.hasSize;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
-import java.util.Optional;
-
-import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeEach;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONObject;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import es.cic.bootcamp.grupo03final.conversor.TipoProductoConversor;
 import es.cic.bootcamp.grupo03final.modelo.TipoProducto;
@@ -150,10 +138,9 @@ public class TipoProductoControladorIntegracionTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(body);
 		
-		MvcResult result = mvc.perform(request)
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andReturn();
+		mvc.perform(request)
+		.andDo(print())
+		.andExpect(status().isOk());
 		
 		TipoProducto resultado = tipoProductoRepositorio.findById(tipoProducto.getId()).get();
 		
@@ -179,10 +166,9 @@ public class TipoProductoControladorIntegracionTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(body);
 		
-		MvcResult result = mvc.perform(request)
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andReturn();
+		mvc.perform(request)
+		.andDo(print())
+		.andExpect(status().isOk());
 		
 		TipoProducto resultado = tipoProductoRepositorio.findById(tipoProducto.getId()).get();
 		
@@ -201,18 +187,15 @@ public class TipoProductoControladorIntegracionTest {
 		TipoProducto tipoProductoADarDeAlta = generarTipoProducto2();
 		tipoProductoADarDeAlta.setId(tipoProducto.getId());
 		tipoProductoADarDeAlta.setActivo(true);
-
-		String body = mapper.writeValueAsString(tipoProductoConversor.entityToDto(tipoProducto));
 		
 
 		MockHttpServletRequestBuilder request = post("/api/tipo-producto/activar/{id}",tipoProducto.getId())
 				.accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON);
 		
-		MvcResult result = mvc.perform(request)
-				.andDo(print())
-				.andExpect(status().isOk())
-				.andReturn();
+		mvc.perform(request)
+		.andDo(print())
+		.andExpect(status().isOk());
 		
 		TipoProducto resultado = tipoProductoRepositorio.findById(tipoProducto.getId()).get();
 		

@@ -127,7 +127,7 @@ public class ProductoServicio {
 
 		if (productoSeleccionado == null) {
 			throw new CreateProductoExcepcion(
-					"No se puede realizar una operación de devolución puesto que el id introducido es nulo");
+					"No se puede realizar una operación de traspaso puesto que el id introducido es nulo");
 		} else {
 
 			if (cantidad <= productoSeleccionado.getCantidadUnidadesAlmacen() && cantidad > 0) {
@@ -146,7 +146,7 @@ public class ProductoServicio {
 			} else {
 
 				throw new CreateProductoExcepcion(
-						"No se puede realizar una operación de devolución puesto que la cantidad indicada es superior a la almacenada en la tienda.");
+						"No se puede realizar una operación de traspaso puesto que la cantidad indicada es superior a la almacenada en la tienda.");
 
 			}
 		}
@@ -158,7 +158,7 @@ public class ProductoServicio {
 
 		if (productoSeleccionado == null) {
 			throw new CreateProductoExcepcion(
-					"No se puede realizar una operación de devolución puesto que el id introducido es nulo");
+					"No se puede realizar una operación de reposición puesto que el id introducido es nulo");
 		} else {
 
 			if (cantidad > 0) {
