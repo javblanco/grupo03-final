@@ -42,6 +42,8 @@ import es.cic.bootcamp.grupo03final.dto.ProductoDto;
 import es.cic.bootcamp.grupo03final.modelo.Producto;
 import es.cic.bootcamp.grupo03final.modelo.TipoProducto;
 import es.cic.bootcamp.grupo03final.repositorio.ProductoRepositorio;
+import es.cic.bootcamp.grupo03final.repositorio.TipoProductoRepositorio;
+
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 
@@ -58,6 +60,9 @@ public class ProductocontroladorIntegracionTest {
 	
 	@Autowired 
 	private ProductoRepositorio productoRepositorio;
+	
+	@Autowired
+	private TipoProductoRepositorio tipoProductoRepositorio;
 	
 	@Autowired
 	private ProductoConversor productoConversor;
@@ -96,6 +101,12 @@ public class ProductocontroladorIntegracionTest {
 		return dto;
 	}
 
+	private TipoProducto generarTipoProducto() {
+		TipoProducto tipoProducto = new TipoProducto();
+		tipoProducto.setNombre("Lavadora");
+		tipoProducto.setDescripcion("Electrodomestico para lavar la ropa.");
+		return tipoProducto;
+	}
 
 	
 	@Test
@@ -316,6 +327,45 @@ public class ProductocontroladorIntegracionTest {
 	}
 
 
+	@Test
+	void testListarActivos() throws Exception {
+		Producto producto = generarProducto();
+		Producto producto1 = generarProducto();
+		Producto producto2 = generarProducto();
+		
+		TipoProducto tipo = generarTipoProducto(); //Se autogeneran como activos
+		TipoProducto tipo1 = generarTipoProducto();
+		TipoProducto tipo2 = generarTipoProducto();
+		
+		tipo2.setActivo(false);
+
+		tipoProductoRepositorio.saveAll(List.of(tipo, tipo1, tipo2));
+		
+		producto.setTipoProducto(tipo);
+		producto1.setTipoProducto(tipo1);
+		producto2.setTipoProducto(tipo2);
+		
+		
+		productoRepositorio.saveAll(List.of(producto, producto1, producto2));
+		
+		MockHttpServletRequestBuilder request = get("/api/producto/tipo/activo")
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		String respuesta = mapper.writeValueAsString(productoConversor.entityListToDtoList(List.of(producto, producto1)));
+		
+		respuesta = respuesta.substring(1, respuesta.length()-1);
+		
+		MvcResult result = mvc.perform(request)
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(1))))
+		.andReturn();
+		
+		String resultado = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
+		
+		assertTrue(resultado.contains(respuesta), "Error en el listado de productos, no son los esperados");
+	}
 	
 	
 

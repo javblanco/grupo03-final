@@ -215,7 +215,6 @@ public class ProductoServicio {
 				listaActivos.add(p);
 				
 			}
-			
 		}
 		
 		listaActivos.forEach(p -> listaDto.add(productoConversor.entityToDto(p)));
