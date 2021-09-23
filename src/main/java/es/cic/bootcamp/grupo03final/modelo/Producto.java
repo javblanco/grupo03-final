@@ -20,7 +20,6 @@ public class Producto {
 	@ManyToOne
 	private TipoProducto tipoProducto;
 	
-	// Campos de texto libre
 	private String nombre;
 	private String marca;
 	private String modelo;

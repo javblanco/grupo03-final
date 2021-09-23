@@ -56,11 +56,6 @@ import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 			tipoProductoServicio.modificar(tipoProducto);
 		}
 		
-		//@DeleteMapping
-		//public void borrar(@PathVariable(required = true, name="id") Long id) {
-			//LOGGER.info("borra un registro de tipo de producto");
-			//tipoProductoServicio.borrar(id);
-		//}
 		
 		@PostMapping("/desactivar/{id}")
 		public void darDeBaja(@PathVariable(required = true, name="id") Long id) {
@@ -74,7 +69,7 @@ import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 			tipoProductoServicio.darDeAlta(id);
 		}
 		
-		@GetMapping("/tipo/activo")
+		@GetMapping("/activo")
 		public List<TipoProductoDto> getProductosTipoActivo() {
 			LOGGER.info("listo los tipos de producto activos");
 			return tipoProductoServicio.listarActivos();

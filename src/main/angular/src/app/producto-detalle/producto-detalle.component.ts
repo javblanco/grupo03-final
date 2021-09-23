@@ -38,7 +38,7 @@ export class ProductoDetalleComponent implements OnInit {
   }
 
   getListaTipos(): void {
-    this.tipoService.getTipos()
+    this.tipoService.getTiposActivos()
     .subscribe(tipos => this.listaTipos = tipos);
   }
 

@@ -1,17 +1,27 @@
 <div class="jumbotron"><h2 id="titulo-tipo-producto-maestro">Listado de tipos de productos</h2></div>
 <div class="container">
+    <div class="form-inline float-right"><div class="form-group mx-sm-3 mb-2">
+        <select id="select-filtrar-tipo" class="form-control" [(ngModel)]="filtro">
+            <option selected [ngValue]="1">Ver activos</option>
+            <option [ngValue]="2">Ver todos</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-info mb-2" id="boton-filtrar-tipo" (click)="filtrar()">Filtrar</button>
+    </div>
 <table id="tabla-tipo-producto" class="table mb-5">
     <thead>
         <tr>
             <th>Nombre</th>
+            <th *ngIf="filtrado">Activo</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let tipo of tipos">
             <td>{{tipo.nombre}}</td>
-            <td><a routerLink="../{{tipo.id}}" (click)="ver()" class="btn btn-info mr-3 mb-1">Ver</a>
-                <a routerLink="../{{tipo.id}}" class="btn btn-primary">Modificar</a></td>
+            <td *ngIf="filtrado">{{tipo.activo}}</td>
+            <td><a routerLink="../{{tipo.id}}" (click)="ver()" class="tipo-ver btn btn-info mr-3">Ver</a>
+                <a routerLink="../{{tipo.id}}" class="tipo-modificar btn btn-primary">Modificar</a></td>
         </tr>
     </tbody>
 </table>

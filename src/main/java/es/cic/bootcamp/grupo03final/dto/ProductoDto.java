@@ -2,7 +2,8 @@ package es.cic.bootcamp.grupo03final.dto;
 
 import java.util.Objects;
 
-import es.cic.bootcamp.grupo03final.modelo.Producto;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import es.cic.bootcamp.grupo03final.modelo.TipoProducto;
 
 public class ProductoDto {
@@ -13,13 +14,16 @@ public class ProductoDto {
 	private String nombreTipoProducto;
 	private TipoProducto tipoProducto;
 	
-	// Campos de texto libre
+	@NotBlank
 	private String nombre;
 	private String marca;
 	private String modelo;
 	private String descripción;
 	
+	@Min(value = 0)
 	private int cantidadUnidadesTienda;
+
+	@Min(value = 0)
 	private int cantidadUnidadesAlmacen;
 	
 	public ProductoDto() {

@@ -4,7 +4,7 @@
 
 <div class="container">
   <label>Seleccione el producto: </label>
-<select class="form-control mb-5"  [(ngModel)]="productoSeleccionado" (ngModelChange)="cargarProducto($event)">
+<select class="form-control mb-5" id="select-producto" [(ngModel)]="productoSeleccionado" (ngModelChange)="cargarProducto($event)">
     <option [ngValue] disabled selected >Seleccione una opción</option>
   <option  *ngFor="let producto of productos" [ngValue]="producto" [selected]="productoSeleccionado == producto">
     {{producto.nombre}}
@@ -42,12 +42,12 @@ No se admiten números negativos
 </div>
 </div>
 
-<button id="producto-guardar" (click)="transferir(transferenciaForm.invalid)" type="submit" [disabled]="!productoT.id" class="btn btn-primary float-left">
+<button id="transferir-guardar" (click)="transferir(transferenciaForm.invalid)" type="submit" [disabled]="!productoT.id" class="btn btn-primary float-left">
   <span *ngIf="accion == 'transferir'">Traspasar</span>
   <span *ngIf="accion == 'devolver'">Devolver</span>
   <span *ngIf="accion == 'reponer'">Reponer</span>
 </button> 
-<button id="producto-volver" (click)="volver()" class="btn btn-secondary float-right">Volver</button>
+<button id="transferir-volver" (click)="volver()" class="btn btn-secondary float-right">Volver</button>
 </form>
 </div>
     

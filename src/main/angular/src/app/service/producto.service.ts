@@ -37,11 +37,26 @@ export class ProductoService {
     return this.http.put(this.url, producto, this.options);
   }
 
+  getProductosTipoActivo(): Observable<Producto[]> {
+    const urlActivo = `${this.url}/tipo-activo`;
+    
+    return this.http.get<Producto[]>(urlActivo);
+  }
   activarSoloLectura(): void {
     this.lectura = true;
   }
 
   desactivarSoloLectura(): void {
     this.lectura = false;
+  }
+
+  getProductosAlmacen(): Observable<Producto[]> {
+    let almacenUrl = `${this.url}/almacen`;
+    return this.http.get<Producto[]>(almacenUrl);
+  }
+
+  getProductosTienda(): Observable<Producto[]> {
+    let tiendaUrl = `${this.url}/tienda`;
+    return this.http.get<Producto[]>(tiendaUrl);
   }
 }

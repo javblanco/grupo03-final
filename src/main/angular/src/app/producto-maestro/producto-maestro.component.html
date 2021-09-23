@@ -1,6 +1,15 @@
 <div class="jumbotron"><h2 id="titulo-producto-maestro">Listado de productos</h2></div>
 
 <div class="container container-xl">
+    <div class="form-inline float-right"><div class="form-group mx-sm-3 mb-2">
+        <select id="select-filtrar-tipo" class="form-control" [(ngModel)]="filtro">
+            <option selected [ngValue]="1">Stock total</option>
+            <option [ngValue]="2">En almacén</option>
+            <option [ngValue]="3">En tienda</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-info mb-2" id="boton-filtrar-tipo" (click)="filtrar()">Filtrar</button>
+    </div>
 <table id="tabla-producto" class="table mb-5">
     <thead>
         <tr>
@@ -8,9 +17,9 @@
             <th>Modelo</th>
             <th>Marca</th>
             <th>Tipo de producto</th>
-            <th>Stock total</th>
-            <th>Cantidad en almacen</th>
-            <th>Cantidad en tienda</th>
+            <th *ngIf="filtrado === 1">Stock total</th>
+            <th *ngIf="filtrado !== 3">Cantidad en almacén</th>
+            <th *ngIf="filtrado !== 2">Cantidad en tienda</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -20,11 +29,11 @@
             <td>{{producto.modelo}}</td>
             <td>{{producto.marca}}</td>
             <td>{{producto.nombreTipoProducto}}</td>
-            <td>{{producto.cantidadUnidadesTienda + producto.cantidadUnidadesAlmacen}}</td>
-            <td>{{producto.cantidadUnidadesAlmacen}}</td>
-            <td>{{producto.cantidadUnidadesTienda}}</td>
-            <td><a routerLink="../{{producto.id}}" (click)="ver()" class="btn btn-block btn-info mr-3 mb-1">Ver</a>
-                <a routerLink="../{{producto.id}}" class="btn btn-block btn-primary">Modificar</a></td>
+            <td *ngIf="filtrado === 1">{{producto.cantidadUnidadesTienda + producto.cantidadUnidadesAlmacen}}</td>
+            <td *ngIf="filtrado !== 3">{{producto.cantidadUnidadesAlmacen}}</td>
+            <td *ngIf="filtrado !== 2">{{producto.cantidadUnidadesTienda}}</td>
+            <td><a routerLink="../{{producto.id}}" (click)="ver()" class="producto-ver btn btn-block btn-info mr-3 mb-1">Ver</a>
+                <a routerLink="../{{producto.id}}" class="producto-modificar btn btn-block btn-primary">Modificar</a></td>
         </tr>
     </tbody>
 </table>

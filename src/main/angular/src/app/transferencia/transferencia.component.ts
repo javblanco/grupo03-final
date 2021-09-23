@@ -2,6 +2,8 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDevolverComponent } from '../modal/modal-devolver/modal-devolver.component';
+import { ModalReponerComponent } from '../modal/modal-reponer/modal-reponer.component';
 import { ModalTransferirComponent } from '../modal/modal-transferir/modal-transferir.component';
 import { ModalVolverComponent } from '../modal/modal-volver/modal-volver.component';
 import { Producto } from '../model/producto';
@@ -40,8 +42,14 @@ export class TransferenciaComponent implements OnInit {
   }
 
   listarProductos(): void {
-    this.productoService.getProductos()
-    .subscribe(productos => this.productos = productos)
+    if(this.accion !== 'reponer') {
+      this.productoService.getProductos()
+      .subscribe(productos => this.productos = productos);
+    } else {
+      this.productoService.getProductosTipoActivo()
+      .subscribe(productos => this.productos = productos);
+    }
+    
   }
 
   volver() : void {
@@ -66,7 +74,7 @@ export class TransferenciaComponent implements OnInit {
 
   ejecutarAccion(): void {
     if(this.accion === 'transferir') {
-      this.crearModal().result.then(
+      this.crearModal(ModalTransferirComponent).result.then(
         () => this.transferenciaService.transferir(this.productoT.id, this.cantidad)
         .subscribe(() =>  {
           this.seleccionarProducto();
@@ -76,7 +84,7 @@ export class TransferenciaComponent implements OnInit {
       );
       
     } else if(this.accion === 'devolver') {
-      this.crearModal().result.then(
+      this.crearModal(ModalDevolverComponent).result.then(
         () => this.transferenciaService.devolver(this.productoT.id, this.cantidad)
         .subscribe(() => {
           this.seleccionarProducto();
@@ -86,7 +94,7 @@ export class TransferenciaComponent implements OnInit {
       );
 
     } else if(this.accion === 'reponer') {
-      this.crearModal().result.then(
+      this.crearModal(ModalReponerComponent).result.then(
         () => this.transferenciaService.reponer(this.productoT.id, this.cantidad)
         .subscribe(() =>  {
           this.seleccionarProducto();
@@ -97,8 +105,8 @@ export class TransferenciaComponent implements OnInit {
     }
   }
 
-crearModal(): NgbModalRef {
-  let modalRef = this.modalService.open(ModalTransferirComponent);
+crearModal(modal: any): NgbModalRef {
+  let modalRef = this.modalService.open(modal);
   modalRef.componentInstance.cantidad = this.cantidad;
   modalRef.componentInstance.nombre = this.productoT.nombre;
 
