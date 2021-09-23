@@ -23,7 +23,7 @@ export class TipoProductoMaestroComponent implements OnInit {
   }
 
   getTipos(): void {
-    this.tipoService.getTipos()
+    this.tipoService.getTiposActivos()
     .subscribe(tipos => this.tipos = tipos);
   }
 

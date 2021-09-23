@@ -20,6 +20,7 @@ export class TipoProductoService {
   constructor(private http: HttpClient) { }
 
   getTipos(): Observable<TipoProducto[]> {
+
     return this.http.get<TipoProducto[]>(this.url);
   }
 
@@ -37,13 +38,13 @@ export class TipoProductoService {
     return this.http.put<any>(this.url, tipo, this.options);
   }
 
-  activarTipo(id: number) {
+  activarTipo(id: number): Observable<any> {
     const idUrl = `${this.url}/activar/${id}`;
 
     return this.http.post(idUrl, this.options);
   }
 
-  desactivarTipo(id: number) {
+  desactivarTipo(id: number): Observable<any> {
     const idUrl = `${this.url}/desactivar/${id}`;
 
     return this.http.post(idUrl, this.options);
@@ -55,5 +56,11 @@ export class TipoProductoService {
 
   desactivarSoloLectura(): void {
     this.lectura = false;
+  }
+
+  getTiposActivos(): Observable<TipoProducto[]> {
+    const activoUrl = `${this.url}/activo`;
+
+    return this.http.get<TipoProducto[]>(activoUrl);
   }
 }

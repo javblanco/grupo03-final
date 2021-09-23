@@ -27,7 +27,7 @@ describe('ProductoDetalleComponent', () => {
         }  ,
         {
           provide: TipoProductoService,
-            useValue: jasmine.createSpyObj('TipoProductoService', ['getTipos'])
+            useValue: jasmine.createSpyObj('TipoProductoService', ['getTiposActivos'])
         }
       ]
     })
@@ -35,7 +35,7 @@ describe('ProductoDetalleComponent', () => {
 
     let tipoSpyService = TestBed.get(TipoProductoService);
 
-    tipoSpyService.getTipos.and.returnValue(of([{id:1, nombre: 'Cafetera', descripcion: 'Máquina que hace café', activo: true},
+    tipoSpyService.getTiposActivos.and.returnValue(of([{id:1, nombre: 'Cafetera', descripcion: 'Máquina que hace café', activo: true},
     {id:2, nombre: 'Bolígrafo', descripcion: 'Sirve para escribir', activo: true},
     {id:3, nombre: 'Goma', descripcion: 'Sirve para borrar algo que se ha apuntado', activo: true},
     {id:4, nombre: 'Libreta', descripcion: 'Se usa para realizar anotaciones', activo: true}]

@@ -4,15 +4,12 @@ import java.util.Objects;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 import es.cic.bootcamp.grupo03final.modelo.TipoProducto;
 
 public class ProductoDto {
 	
 	private Long id;
 	
-	@NotNull
 	private Long idTipoProducto;
 	private String nombreTipoProducto;
 	private TipoProducto tipoProducto;

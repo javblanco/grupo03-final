@@ -83,7 +83,7 @@ public class ProductoControlador {
 		
 	}
 	
-	@GetMapping("/tipo/activo")
+	@GetMapping("/tipo-activo")
 	public List<ProductoDto> getProductosTipoActivo() {
 		
 		return productoServicio.getProductosTipoActivo();

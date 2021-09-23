@@ -11,11 +11,11 @@ export const cantidadValidador: ValidatorFn = (control: AbstractControl): Valida
     return true ? {errorCantidad: true} : null;
   }
 
-  if(accion?.value == 1) {
+  if(accion?.value == 'transferir') {
     return cantidad?.value > cantidadAlmacen?.value ? {errorTransferencia: true} : null ;
   }
 
-  if(accion?.value == 2) {
+  if(accion?.value == 'devolver') {
     return cantidad?.value > cantidadTienda?.value ? {errorDevolucion: true} : null ;
   }
 

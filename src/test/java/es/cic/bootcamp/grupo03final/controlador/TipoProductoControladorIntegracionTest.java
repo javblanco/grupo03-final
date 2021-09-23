@@ -230,7 +230,7 @@ public class TipoProductoControladorIntegracionTest {
 	
 		tipoProductoRepositorio.saveAll(List.of(producto, producto1, producto2));
 		
-		MockHttpServletRequestBuilder request = get("/api/tipo-producto/tipo/activo")
+		MockHttpServletRequestBuilder request = get("/api/tipo-producto/activo")
 				.accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON);
 		
