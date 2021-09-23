@@ -106,19 +106,14 @@ public class ProductoServicio {
 
 			if (cantidad <= productoSeleccionado.getCantidadUnidadesTienda() && cantidad > 0) {
 
-				// Realiza la operación correctamente
-
 				productoSeleccionado
 						.setCantidadUnidadesAlmacen(productoSeleccionado.getCantidadUnidadesAlmacen() + cantidad);
 				productoSeleccionado
 						.setCantidadUnidadesTienda(productoSeleccionado.getCantidadUnidadesTienda() - cantidad);
 
-productoRepositorio.save(productoSeleccionado);
-
+				productoRepositorio.save(productoSeleccionado);
 
 			} else {
-
-				// Si el numero introducido es mayor que las cantidades en tienda ERROR
 				throw new CreateProductoExcepcion(
 						"No se puede realizar una operación de devolución puesto que la cantidad indicada es superior a la almacenada en la tienda.");
 
@@ -137,22 +132,19 @@ productoRepositorio.save(productoSeleccionado);
 
 			if (cantidad <= productoSeleccionado.getCantidadUnidadesAlmacen() && cantidad > 0) {
 
-				// Realiza la operación correctamente
-
 				productoSeleccionado
 						.setCantidadUnidadesAlmacen(productoSeleccionado.getCantidadUnidadesAlmacen() - cantidad);
 				productoSeleccionado
 						.setCantidadUnidadesTienda(productoSeleccionado.getCantidadUnidadesTienda() + cantidad);
-productoRepositorio.save(productoSeleccionado);
+				productoRepositorio.save(productoSeleccionado);
 
 				productoRepositorio.save(productoSeleccionado);
-			}else if ( cantidad == 0) {
+			} else if (cantidad == 0) {
 				throw new CreateProductoExcepcion(
 						"No se pueden traspasar 0 cantidades de un producto, no se ha seleccionado una cantidad a transferir.");
 
 			} else {
 
-				// Si el numero introducido es mayor que las cantidades en tienda ERROR
 				throw new CreateProductoExcepcion(
 						"No se puede realizar una operación de devolución puesto que la cantidad indicada es superior a la almacenada en la tienda.");
 
@@ -161,7 +153,7 @@ productoRepositorio.save(productoSeleccionado);
 	}
 
 	public void pedirNuevoStockAlmacen(Long id, int cantidad) {
-		
+
 		Producto productoSeleccionado = comprobacionDeRegistroDeProducto(id);
 
 		if (productoSeleccionado == null) {
@@ -171,27 +163,23 @@ productoRepositorio.save(productoSeleccionado);
 
 			if (cantidad > 0) {
 
-				// Realiza la operación correctamente
-
 				productoSeleccionado
 						.setCantidadUnidadesAlmacen(productoSeleccionado.getCantidadUnidadesAlmacen() + cantidad);
-productoRepositorio.save(productoSeleccionado);
+				productoRepositorio.save(productoSeleccionado);
 
-			} else if ( cantidad == 0) {
+			} else if (cantidad == 0) {
 				throw new CreateProductoExcepcion(
 						"No se pueden traspasar 0 cantidades de un producto, no se ha seleccionado una cantidad a transferir.");
-			}else {
+			} else {
 
-				// Si el numero introducido es mayor que las cantidades en tienda ERROR
 				throw new CreateProductoExcepcion(
 						"No se puede realizar una operación de añadir stock al almacen, porque la cantidad introducida es negativa.");
 
 			}
 		}
-		
+
 	}
-	
-	
+
 	private Producto comprobacionDeRegistroDeProducto(Long id) {
 
 		Optional<Producto> productoExiste = productoRepositorio.findById(id);
@@ -209,28 +197,28 @@ productoRepositorio.save(productoSeleccionado);
 	}
 
 	public List<ProductoDto> getProductosTipoActivo() {
-		
+
 		List<Producto> listaCompleta = new ArrayList<>();
 		List<Producto> listaActivos = new ArrayList<>();
 		List<ProductoDto> listaDto = new ArrayList<>();
 
 		productoRepositorio.findAll().forEach(listaCompleta::add);
-		
-		for (int i=0; i<listaCompleta.size(); i++) {
-			
+
+		for (int i = 0; i < listaCompleta.size(); i++) {
+
 			Producto p = listaCompleta.get(i);
-			
-			if ( p.getTipoProducto().isActivo() == true) {
-				
+
+			if (p.getTipoProducto().isActivo() == true) {
+
 				listaActivos.add(p);
-				
+
 			}
 		}
-		
+
 		listaActivos.forEach(p -> listaDto.add(productoConversor.entityToDto(p)));
 
 		return listaDto;
-		
+
 	}
 
 	public List<ProductoDto> getProductosEnStock() {
@@ -239,20 +227,20 @@ productoRepositorio.save(productoSeleccionado);
 		List<ProductoDto> listaDto = new ArrayList<>();
 
 		productoRepositorio.findAll().forEach(listaCompleta::add);
-		
-		for (int i=0; i<listaCompleta.size(); i++) {
-			
+
+		for (int i = 0; i < listaCompleta.size(); i++) {
+
 			Producto p = listaCompleta.get(i);
 			int stockDisponible = p.getCantidadUnidadesAlmacen() + p.getCantidadUnidadesTienda();
-			if ( stockDisponible > 0) {
-				listaEnStock.add(p);	
+			if (stockDisponible > 0) {
+				listaEnStock.add(p);
 			}
 		}
-		
+
 		listaEnStock.forEach(p -> listaDto.add(productoConversor.entityToDto(p)));
 
 		return listaDto;
-		
+
 	}
 
 	public List<ProductoDto> getProductosEnStockAlmacen() {
@@ -261,21 +249,21 @@ productoRepositorio.save(productoSeleccionado);
 		List<ProductoDto> listaDto = new ArrayList<>();
 
 		productoRepositorio.findAll().forEach(listaCompleta::add);
-		
-		for (int i=0; i<listaCompleta.size(); i++) {
-			
+
+		for (int i = 0; i < listaCompleta.size(); i++) {
+
 			Producto p = listaCompleta.get(i);
 			int stockDisponibleAlmacen = p.getCantidadUnidadesAlmacen();
-			
-			if ( stockDisponibleAlmacen > 0) {
-				listaEnStock.add(p);	
+
+			if (stockDisponibleAlmacen > 0) {
+				listaEnStock.add(p);
 			}
 		}
-		
+
 		listaEnStock.forEach(p -> listaDto.add(productoConversor.entityToDto(p)));
 
 		return listaDto;
-		
+
 	}
 
 	public List<ProductoDto> getProductosEnStockTienda() {
@@ -284,21 +272,20 @@ productoRepositorio.save(productoSeleccionado);
 		List<ProductoDto> listaDto = new ArrayList<>();
 
 		productoRepositorio.findAll().forEach(listaCompleta::add);
-		
-		for (int i=0; i<listaCompleta.size(); i++) {
-			
+
+		for (int i = 0; i < listaCompleta.size(); i++) {
+
 			Producto p = listaCompleta.get(i);
 			int stockDisponibleTienda = p.getCantidadUnidadesTienda();
-			
-			if ( stockDisponibleTienda > 0) {
-				listaEnStock.add(p);	
+
+			if (stockDisponibleTienda > 0) {
+				listaEnStock.add(p);
 			}
 		}
-		
+
 		listaEnStock.forEach(p -> listaDto.add(productoConversor.entityToDto(p)));
 
 		return listaDto;
-		
+
 	}
 }
-

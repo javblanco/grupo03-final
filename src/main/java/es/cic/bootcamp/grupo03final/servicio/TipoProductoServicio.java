@@ -65,10 +65,6 @@ public class TipoProductoServicio {
 		tipoProductoConversor.entityToDto(tipoProductoRepositorio.save(tipoProducto));
 	}
 
-//public void borrar(Long id) {
-	// tipoProductoRepositorio.deleteById(id);
-//}
-
 	public void darDeBaja(Long id) {
 		Optional<TipoProducto> optional = tipoProductoRepositorio.findById(id);
 		TipoProducto tipoProducto = null;
