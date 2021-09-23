@@ -195,6 +195,8 @@ public class TipoProductoControladorIntegracionTest {
 		TipoProducto tipoProducto = generarTipoProducto2();
 		
 		tipoProductoRepositorio.save(tipoProducto);
+		tipoProducto.setActivo(false);
+		tipoProductoRepositorio.save(tipoProducto);
 		
 		TipoProducto tipoProductoADarDeAlta = generarTipoProducto2();
 		tipoProductoADarDeAlta.setId(tipoProducto.getId());
@@ -205,8 +207,7 @@ public class TipoProductoControladorIntegracionTest {
 
 		MockHttpServletRequestBuilder request = post("/api/tipo-producto/activar/{id}",tipoProducto.getId())
 				.accept(MediaType.APPLICATION_JSON)
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(body);
+				.contentType(MediaType.APPLICATION_JSON);
 		
 		MvcResult result = mvc.perform(request)
 				.andDo(print())

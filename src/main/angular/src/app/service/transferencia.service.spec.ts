@@ -1,11 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
 import { Producto } from '../model/producto';
 
-import { ProductoService } from './producto.service';
+import { TransferenciaService } from './transferencia.service';
 
-describe('ProductoService', () => {
-  let service: ProductoService;
+describe('TransferenciaService', () => {
+  let service: TransferenciaService;
   let httpClientSpy: { get: jasmine.Spy };
 
   const productos: Producto[] = [
@@ -18,30 +17,13 @@ describe('ProductoService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-
     
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
     
-    service = new ProductoService(httpClientSpy as any);
+    service = new TransferenciaService(httpClientSpy as any);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('El método getProductos debería devolver 4 registros', () => {
-    httpClientSpy.get.and.returnValue(of(productos));
-
-    service.getProductos().subscribe(
-      resultado => expect(resultado.length).toBe(4)
-    );
-  });
-
-  it('El método getProducto de id=1 debería devolver un producto de nombre "Noespresso"', () => {
-    httpClientSpy.get.and.returnValue(of(productos[0]));
-
-    service.getProducto(1).subscribe(
-      resultado => expect(resultado.nombre).toBe('Noespresso')
-    );
   });
 });

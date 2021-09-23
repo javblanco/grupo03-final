@@ -20,9 +20,9 @@
             <td>{{producto.modelo}}</td>
             <td>{{producto.marca}}</td>
             <td>{{producto.nombreTipoProducto}}</td>
-            <td>{{producto.cantidadTotal}}</td>
-            <td>{{producto.cantidadAlmacen}}</td>
-            <td>{{producto.cantidadTienda}}</td>
+            <td>{{producto.cantidadUnidadesTienda + producto.cantidadUnidadesAlmacen}}</td>
+            <td>{{producto.cantidadUnidadesAlmacen}}</td>
+            <td>{{producto.cantidadUnidadesTienda}}</td>
             <td><a routerLink="../{{producto.id}}" (click)="ver()" class="btn btn-block btn-info mr-3 mb-1">Ver</a>
                 <a routerLink="../{{producto.id}}" class="btn btn-block btn-primary">Modificar</a></td>
         </tr>

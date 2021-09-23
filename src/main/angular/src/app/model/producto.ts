@@ -5,7 +5,7 @@ export interface Producto {
     nombreTipoProducto: string;
     marca: string;
     modelo: string;
-    cantidadAlmacen: number;
-    cantidadTienda: number;
+    cantidadUnidadesTienda: number;
+    cantidadUnidadesAlmacen: number;
     cantidadTotal: number;
 }

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +73,8 @@ class TipoProductoRepositorioTest{
 		
 		tipoProductoRepositorio.findAll().forEach(listaEnBBDD::add);
 		
-		assertEquals(listaEnBBDD.size(),listaTipoProducto.size());
+		assertThat(listaEnBBDD.size())
+		.isGreaterThanOrEqualTo(listaTipoProducto.size());
 		
 	}
 	

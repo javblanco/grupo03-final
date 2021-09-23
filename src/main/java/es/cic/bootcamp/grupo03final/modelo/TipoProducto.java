@@ -7,10 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 public class TipoProducto {
@@ -28,6 +28,11 @@ public class TipoProducto {
 	
 	@Column(columnDefinition = "boolean default true")
 	private boolean activo = true;
+
+	@PrePersist
+	private void prePersist() {
+		activo = true;
+	}
 	
 	public TipoProducto() {
 		

@@ -1,13 +1,13 @@
 <div class="modal-header">
-    <h4 class="modal-title">¿Desea dar de alta este registro?</h4>
+    <h4 class="modal-title">¿Desea pedir estas unidades para el almacén?</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p>Se va a proceder a dar de alta este registro. ¿Está seguro de que desea continuar la operación?</p>
+    <p>Se va a proceder a solicitar {{cantidad}} unidades del producto {{nombre}} para el almacén. ¿Está seguro de que desea continuar la operación?</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('Cancelar click')">Cancelar</button>
-    <button type="button" class="btn btn-danger" (click)="activeModal.close('Confirmar click')" id="modal-boton-alta">Confirmar</button>
+    <button type="button" class="btn btn-danger" (click)="activeModal.close('Confirmar click')" id="modal-boton-reponer">Confirmar</button>
   </div>

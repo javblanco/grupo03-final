@@ -4,8 +4,8 @@ describe('Creación y listado del tipo de productos', () => {
   it('Visitar la vista del listado y comprobar los tipos cargados por defecto', () => {
     cy.visit('/tipo-producto/listar');
 
-    cy.get('table#tabla-tipo-producto tbody tr').should('have.length.at.least', 4);
-    cy.get('table#tabla-tipo-producto tbody tr').contains('Libreta');
+    cy.get('table#tabla-tipo-producto tbody tr').should('have.length.at.least', 2);
+    cy.get('table#tabla-tipo-producto tbody tr').contains('Taza');
 
     cy.get('table#tabla-tipo-producto tbody tr').then($elements => {
       numeroRegistros = $elements.length;

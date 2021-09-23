@@ -112,10 +112,10 @@ public class ProductoServicio {
 						.setCantidadUnidadesAlmacen(productoSeleccionado.getCantidadUnidadesAlmacen() + cantidad);
 				productoSeleccionado
 						.setCantidadUnidadesTienda(productoSeleccionado.getCantidadUnidadesTienda() - cantidad);
-				productoRepositorio.save(productoSeleccionado);
-			}else if ( cantidad == 0) {
-				throw new CreateProductoExcepcion(
-						"No se pueden traspasar 0 cantidades de un producto, no se ha seleccionado una cantidad a transferir.");
+
+productoRepositorio.save(productoSeleccionado);
+
+
 			} else {
 
 				// Si el numero introducido es mayor que las cantidades en tienda ERROR
@@ -143,6 +143,7 @@ public class ProductoServicio {
 						.setCantidadUnidadesAlmacen(productoSeleccionado.getCantidadUnidadesAlmacen() - cantidad);
 				productoSeleccionado
 						.setCantidadUnidadesTienda(productoSeleccionado.getCantidadUnidadesTienda() + cantidad);
+productoRepositorio.save(productoSeleccionado);
 
 				productoRepositorio.save(productoSeleccionado);
 			}else if ( cantidad == 0) {
@@ -174,7 +175,7 @@ public class ProductoServicio {
 
 				productoSeleccionado
 						.setCantidadUnidadesAlmacen(productoSeleccionado.getCantidadUnidadesAlmacen() + cantidad);
-				productoRepositorio.save(productoSeleccionado);
+productoRepositorio.save(productoSeleccionado);
 
 			} else if ( cantidad == 0) {
 				throw new CreateProductoExcepcion(

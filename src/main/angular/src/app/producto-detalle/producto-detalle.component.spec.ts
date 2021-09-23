@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { of } from 'rxjs';
+import { Producto } from '../model/producto';
 import { ProductoService } from '../service/producto.service';
 import { TipoProductoService } from '../service/tipo-producto.service';
 
@@ -43,7 +44,7 @@ describe('ProductoDetalleComponent', () => {
     let productoSpyService = TestBed.get(ProductoService);
 
     productoSpyService.getProducto.and.returnValue(of([
-      {id:1, nombre: 'Noespresso', marca: 'Cafeteras SA', modelo: 'Noespresso 3000', cantidadAlmacen: 10, cantidadTienda: 2, cantidadTotal: 12, idTipoProducto: 1, nombreTipoProducto: 'Cafetera'},
+      {id:1, nombre: 'Noespresso', marca: 'Cafeteras SA', modelo: 'Noespresso 3000', cantidadUnidadesAlmacen: 10, cantidadUnidadesTienda: 2, cantidadTotal: 12, idTipoProducto: 1, nombreTipoProducto: 'Cafetera'},
 
     ]))
 
@@ -57,5 +58,29 @@ describe('ProductoDetalleComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('Los inputs deberían estar vacios', async () => {
+    component.producto = <Producto>{};
+    let compile = fixture.nativeElement;
+
+    fixture.detectChanges();
+
+    fixture.whenStable().then(async () => {
+      await expect(compile.querySelector('input#producto-nombre')?.value).toBe('');
+ 
+     });
+  });
+
+  it('El input de nombre debería ser "Noespresso"', async () => {
+    component.producto =       {id:1, nombre: 'Noespresso', marca: 'Cafeteras SA', modelo: 'Noespresso 3000', cantidadUnidadesAlmacen: 10, cantidadUnidadesTienda: 2, cantidadTotal: 12, idTipoProducto: 1, nombreTipoProducto: 'Cafetera'};
+    let compile = fixture.nativeElement;
+
+    fixture.detectChanges();
+
+    fixture.whenStable().then(async () => {
+      await expect(compile.querySelector('input#producto-nombre')?.value).toBe('Noespresso');
+ 
+     });
   });
 });

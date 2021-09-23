@@ -61,7 +61,7 @@ public class ProductoControlador {
 
 	
 	@PostMapping("/transferir/{id}")
-	public void transferirTienda(@PathVariable(required = true, name = "id") Long id, @RequestBody Integer cantidad) {
+	public void transferirTienda(@PathVariable(required = true, name = "id") Long id, @RequestBody int cantidad) {
 		
 		//Trasnferir la cantidad indicada del producto indicado del tipo indicado
 		// del almacen a la tienda
