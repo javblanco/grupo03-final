@@ -1,6 +1,6 @@
-<div class="jumbotron"><h2 *ngIf="accion == 1">Pasar productos de almacén a la tienda</h2>
-  <h2 *ngIf="accion == 2">Devolver productos de la tienda al almacén</h2>
-  <h2 *ngIf="accion == 3">Reponer productos en almacén</h2></div>
+<div class="jumbotron"><h2 *ngIf="accion == 'transferir'">Pasar productos de almacén a la tienda</h2>
+  <h2 *ngIf="accion == 'devolver'">Devolver productos de la tienda al almacén</h2>
+  <h2 *ngIf="accion == 'reponer'">Reponer productos en almacén</h2></div>
 
 <div class="container">
   <label>Seleccione el producto: </label>
@@ -19,9 +19,9 @@
 <label>Cantidad de stock en la tienda:</label>
 <input type="number" class="form-control" id="cantidad-tienda" name="cantidad_tienda" [ngModel]="productoT.cantidadUnidadesTienda" disabled><br>
 
-<label>Cantidad de stock a <span *ngIf="accion == 1">traspasar</span>
-  <span *ngIf="accion == 2">devolver</span>
-  <span *ngIf="accion == 3">reponer</span>:</label>
+<label>Cantidad de stock a <span *ngIf="accion == 'tranferir'">traspasar</span>
+  <span *ngIf="accion == 'devolver'">devolver</span>
+  <span *ngIf="accion == 'reponer'">reponer</span>:</label>
 <input type="number" class="form-control" id="cantidad-traspasar" name="cantidad_traspasar" #cantidad_traspasar="ngModel" [disabled]="!productoT.id"  [(ngModel)]="cantidad" min="0"><br>
 
 <input type="hidden" name="accion" [(ngModel)]="accion"/>
@@ -43,9 +43,9 @@ No se admiten números negativos
 </div>
 
 <button id="producto-guardar" (click)="transferir(transferenciaForm.invalid)" type="submit" [disabled]="!productoT.id" class="btn btn-primary float-left">
-  <span *ngIf="accion == 1">Traspasar</span>
-  <span *ngIf="accion == 2">Devolver</span>
-  <span *ngIf="accion == 3">Reponer</span>
+  <span *ngIf="accion == 'transferir'">Traspasar</span>
+  <span *ngIf="accion == 'devolver'">Devolver</span>
+  <span *ngIf="accion == 'reponer'">Reponer</span>
 </button> 
 <button id="producto-volver" (click)="volver()" class="btn btn-secondary float-right">Volver</button>
 </form>

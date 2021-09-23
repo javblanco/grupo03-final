@@ -1,13 +1,34 @@
-<div class="jumbotron"><h2>Navegación</h2></div>
+<div class="jumbotron">
+  <h2>ERP - Gestión de stock</h2>
+</div>
 
 <div class="container">
-<nav class="nav flex-column">
-    <a class="nav-link" routerLink="/tipo-producto/listar">Listado de tipos de producto</a>
-    <a class="nav-link" routerLink="/tipo-producto/">Dar de alta un tipo de producto</a>
-    <a class="nav-link" routerLink="/producto/listar">Listado de productos</a>
-    <a class="nav-link" routerLink="/producto/">Dar de alta un producto</a>
-    <a class="nav-link" routerLink="/transferir/" (click)="transferir()">Pasar productos de almacén a la tienda</a>
-    <a class="nav-link" routerLink="/transferir/" (click)="devolver()">Devolver productos de la tienda al almacén</a>
-    <a class="nav-link" routerLink="/transferir/" (click)="reponer()">Reponer productos en almacén</a>
-  </nav>
+  <ngb-accordion #acc="ngbAccordion">
+    <ngb-panel title="Tipo de producto" class="acc-nav" id="tipo">
+      <ng-template ngbPanelContent>
+        <nav class="nav flex-column">
+          <a class="nav-link" routerLink="/tipo-producto/listar">Ver listado</a>
+          <a class="nav-link" routerLink="/tipo-producto/">Crear</a>
+        </nav>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel title="Producto" class="acc-nav" id="producto">
+      <ng-template ngbPanelContent>
+        <nav class="nav flex-column">
+          <a class="nav-link" routerLink="/tipo-producto/listar">Ver listado</a>
+          <a class="nav-link" routerLink="/tipo-producto/">Crear</a>
+        </nav>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel title="Gestión de stock" class="acc-nav" id="transferir">
+      <ng-template ngbPanelContent>
+        <nav class="nav flex-column">
+
+          <a class="nav-link" routerLink="/transferir/">Pasar a tienda</a>
+          <a class="nav-link" routerLink="/devolver/">Devolver al almacén</a>
+          <a class="nav-link" routerLink="/reponer/">Reponer almacén</a>
+        </nav>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
 </div>

@@ -16,7 +16,9 @@ const routes: Routes = [
   {path: 'producto/listar', component: ProductoMaestroComponent},
   {path: 'producto', component: ProductoDetalleComponent},
   {path: 'producto/:id', component: ProductoDetalleComponent},
-  {path: 'transferir', component: TransferenciaComponent}
+  {path: 'transferir', component: TransferenciaComponent},
+  {path: 'devolver', component: TransferenciaComponent},
+  {path: 'reponer', component: TransferenciaComponent},
 ];
 
 @NgModule({

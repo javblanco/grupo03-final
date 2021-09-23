@@ -7,8 +7,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TransferenciaService {
-
-  accion = 1;
   url = `${environment.host}/api/producto`;
 
   options = {

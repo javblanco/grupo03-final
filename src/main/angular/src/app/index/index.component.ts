@@ -13,15 +13,4 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  transferir() {
-    this.service.accion = 1;
-  }
-
-  devolver() {
-    this.service.accion = 2;
-  }
-
-  reponer() {
-    this.service.accion = 3;
-  }
 }
