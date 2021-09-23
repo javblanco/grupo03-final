@@ -96,4 +96,10 @@ public class ProductoControlador {
 		
 	}
 	
+	@GetMapping("/almacen-api/producto/tienda")
+	public List<ProductoDto> getProductosEnStock() {
+		
+		return productoServicio.getProductosEnStock();
+	}
+	
 }

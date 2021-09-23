@@ -232,4 +232,26 @@ public class ProductoServicio {
 		
 	}
 
+	public List<ProductoDto> getProductosEnStock() {
+		List<Producto> listaCompleta = new ArrayList<>();
+		List<Producto> listaEnStock = new ArrayList<>();
+		List<ProductoDto> listaDto = new ArrayList<>();
+
+		productoRepositorio.findAll().forEach(listaCompleta::add);
+		
+		for (int i=0; i<listaCompleta.size(); i++) {
+			
+			Producto p = listaCompleta.get(i);
+			int stockDisponible = p.getCantidadUnidadesAlmacen() + p.getCantidadUnidadesTienda();
+			if ( stockDisponible > 0) {
+				listaEnStock.add(p);	
+			}
+		}
+		
+		listaEnStock.forEach(p -> listaDto.add(productoConversor.entityToDto(p)));
+
+		return listaDto;
+		
+	}
 }
+
