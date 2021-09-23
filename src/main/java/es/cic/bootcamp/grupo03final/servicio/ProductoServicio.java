@@ -198,4 +198,30 @@ public class ProductoServicio {
 
 	}
 
+	public List<ProductoDto> getProductosTipoActivo() {
+		
+		List<Producto> listaCompleta = new ArrayList<>();
+		List<Producto> listaActivos = new ArrayList<>();
+		List<ProductoDto> listaDto = new ArrayList<>();
+
+		productoRepositorio.findAll().forEach(listaCompleta::add);
+		
+		for (int i=0; i<listaCompleta.size(); i++) {
+			
+			Producto p = listaCompleta.get(i);
+			
+			if ( p.getTipoProducto().isActivo() == true) {
+				
+				listaActivos.add(p);
+				
+			}
+			
+		}
+		
+		listaActivos.forEach(p -> listaDto.add(productoConversor.entityToDto(p)));
+
+		return listaDto;
+		
+	}
+
 }
