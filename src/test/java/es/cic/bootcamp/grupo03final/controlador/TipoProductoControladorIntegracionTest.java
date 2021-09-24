@@ -34,7 +34,7 @@ import es.cic.bootcamp.grupo03final.repositorio.TipoProductoRepositorio;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TipoProductoControladorIntegracionTest {
+class TipoProductoControladorIntegracionTest {
 
 	@Autowired
 	private MockMvc mvc;

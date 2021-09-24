@@ -20,7 +20,7 @@ import es.cic.bootcamp.grupo03final.repositorio.TipoProductoRepositorio;
 import es.cic.bootcamp.grupo03final.servicio.TipoProductoServicio;
 
 @SpringBootTest
-public class TipoProductoServicioTest {
+class TipoProductoServicioTest {
 
     @Autowired
     private TipoProductoServicio tipoProductoServicio;
