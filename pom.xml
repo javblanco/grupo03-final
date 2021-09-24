@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>es.cic.bootcamp</groupId>
 	<artifactId>grupo03-final</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>grupo03-final</name>
 	<description>Proyecto final Grupo03 - ERP</description>
 	<properties>
