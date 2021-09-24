@@ -84,7 +84,7 @@ public class TipoProductoServicio {
 
 	public void darDeAlta(Long id) {
 		Optional<TipoProducto> optional = tipoProductoRepositorio.findById(id);
-		TipoProducto tipoProducto = new TipoProducto();
+		TipoProducto tipoProducto = null;
 
 		if (optional.isPresent()) {
 			tipoProducto = optional.get();

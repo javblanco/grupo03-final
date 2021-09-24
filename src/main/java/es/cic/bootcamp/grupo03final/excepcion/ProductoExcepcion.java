@@ -4,13 +4,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class CreateProductoExcepcion extends RuntimeException {
+public class ProductoExcepcion extends RuntimeException {
 
-	public CreateProductoExcepcion(String message, Throwable cause) {
+	public ProductoExcepcion(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	public CreateProductoExcepcion(String message) {
+	public ProductoExcepcion(String message) {
 		super(message);
 	}
 

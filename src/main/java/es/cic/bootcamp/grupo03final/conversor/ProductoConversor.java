@@ -55,7 +55,7 @@ public class ProductoConversor {
 		return dto;
 	}
 
-	public void dtoToEntity(Producto producto, @Valid ProductoDto dto, TipoProducto tipoProducto) {
+	public void dtoToEntity(Producto producto, @Valid ProductoDto dto) {
 
 		if (dto.getId() != null) {
 			producto.setId(dto.getId());

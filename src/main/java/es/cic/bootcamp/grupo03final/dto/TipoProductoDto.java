@@ -16,7 +16,6 @@ public class TipoProductoDto {
 	@Length(max=256)
 	private String descripcion;
 	
-	@Column(columnDefinition = "boolean default true")
 	private boolean activo = true;
 	
 	public Long getId() {

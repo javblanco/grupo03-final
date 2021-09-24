@@ -30,18 +30,6 @@ public class Producto {
 		super();
 	}
 	
-	public Producto(Long id, TipoProducto tipoProducto, String nombre, String marca, String modelo, String descripción,
-			int cantidadUnidadesTienda, int cantidadUnidadesAlmacen) {
-		super();
-		this.id = id;
-		this.tipoProducto = tipoProducto;
-		this.nombre = nombre;
-		this.marca = marca;
-		this.modelo = modelo;
-		this.descripción = descripción;
-		this.cantidadUnidadesTienda = cantidadUnidadesTienda;
-		this.cantidadUnidadesAlmacen = cantidadUnidadesAlmacen;
-	}
 
 	public Long getId() {
 		return id;

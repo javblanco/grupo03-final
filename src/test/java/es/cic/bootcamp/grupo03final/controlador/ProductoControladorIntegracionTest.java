@@ -44,7 +44,7 @@ import es.cic.bootcamp.grupo03final.repositorio.TipoProductoRepositorio;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class ProductocontroladorIntegracionTest {
+public class ProductoControladorIntegracionTest {
 
 	@Autowired
 	private MockMvc mvc;
@@ -256,8 +256,8 @@ public class ProductocontroladorIntegracionTest {
 		int cantidadTiendaNueva = productoRepositorio.findById(p.getId()).get().getCantidadUnidadesTienda();
 		int cantidadAlmacenNueva = productoRepositorio.findById(p.getId()).get().getCantidadUnidadesAlmacen();
 		
-		assertEquals(cantidadTiendaNueva,2, "No se ha restado la cantidad correctamente de la tienda.");
-		assertEquals(cantidadAlmacenNueva,14,  "No se ha sumado la cantidad correctamente del almacen.");
+		assertEquals(2,cantidadTiendaNueva, "No se ha restado la cantidad correctamente de la tienda.");
+		assertEquals(14,cantidadAlmacenNueva,  "No se ha sumado la cantidad correctamente del almacen.");
 	}
 	
 	@Test
@@ -285,8 +285,8 @@ public class ProductocontroladorIntegracionTest {
 		int cantidadTiendaNueva = productoRepositorio.findById(p.getId()).get().getCantidadUnidadesTienda();
 		int cantidadAlmacenNueva = productoRepositorio.findById(p.getId()).get().getCantidadUnidadesAlmacen();
 		
-		assertEquals( cantidadAlmacenNueva, 6, "No se ha restado la cantidad correctamente del almacen.");
-		assertEquals(cantidadTiendaNueva , 10,  "No se ha sumado la cantidad correctamente de la tienda.");
+		assertEquals(6, cantidadAlmacenNueva, "No se ha restado la cantidad correctamente del almacen.");
+		assertEquals(10, cantidadTiendaNueva ,  "No se ha sumado la cantidad correctamente de la tienda.");
 		
 	}
 	
@@ -313,7 +313,7 @@ public class ProductocontroladorIntegracionTest {
 
 		int cantidadAlmacenNueva = productoRepositorio.findById(p.getId()).get().getCantidadUnidadesAlmacen();
 		
-		assertEquals( cantidadAlmacenNueva, 30, "No se ha sumado la cantidad correctamente del almacen.");
+		assertEquals( 30, cantidadAlmacenNueva, "No se ha sumado la cantidad correctamente del almacen.");
 		
 	}
 

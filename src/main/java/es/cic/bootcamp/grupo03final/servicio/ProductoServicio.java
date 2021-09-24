@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.cic.bootcamp.grupo03final.conversor.ProductoConversor;
 import es.cic.bootcamp.grupo03final.dto.ProductoDto;
-import es.cic.bootcamp.grupo03final.excepcion.CreateProductoExcepcion;
+import es.cic.bootcamp.grupo03final.excepcion.ProductoExcepcion;
 import es.cic.bootcamp.grupo03final.modelo.Producto;
 import es.cic.bootcamp.grupo03final.modelo.TipoProducto;
 import es.cic.bootcamp.grupo03final.repositorio.ProductoRepositorio;
@@ -34,7 +34,7 @@ public class ProductoServicio {
 	public Long create(@Valid ProductoDto dto) {
 
 		if (dto.getId() != null) {
-			throw new CreateProductoExcepcion("No se puede realizar una operación de modificación");
+			throw new ProductoExcepcion("No se puede realizar una operación de modificación");
 		}
 
 		Optional<TipoProducto> optional = tipoProductoRepository.findById(dto.getIdTipoProducto());
@@ -85,7 +85,7 @@ public class ProductoServicio {
 		if (optional.isPresent()) {
 			Producto producto = optional.get();
 
-			productoConversor.dtoToEntity(producto, dto, producto.getTipoProducto());
+			productoConversor.dtoToEntity(producto, dto);
 			productoRepositorio.save(producto);
 		}
 
@@ -100,7 +100,7 @@ public class ProductoServicio {
 		Producto productoSeleccionado = comprobacionDeRegistroDeProducto(id);
 
 		if (productoSeleccionado == null) {
-			throw new CreateProductoExcepcion(
+			throw new ProductoExcepcion(
 					"No se puede realizar una operación de devolución puesto que el id introducido es nulo");
 		} else {
 
@@ -114,7 +114,7 @@ public class ProductoServicio {
 				productoRepositorio.save(productoSeleccionado);
 
 			} else {
-				throw new CreateProductoExcepcion(
+				throw new ProductoExcepcion(
 						"No se puede realizar una operación de devolución puesto que la cantidad indicada es superior a la almacenada en la tienda.");
 
 			}
@@ -126,7 +126,7 @@ public class ProductoServicio {
 		Producto productoSeleccionado = comprobacionDeRegistroDeProducto(id);
 
 		if (productoSeleccionado == null) {
-			throw new CreateProductoExcepcion(
+			throw new ProductoExcepcion(
 					"No se puede realizar una operación de traspaso puesto que el id introducido es nulo");
 		} else {
 
@@ -140,12 +140,12 @@ public class ProductoServicio {
 
 				productoRepositorio.save(productoSeleccionado);
 			} else if (cantidad == 0) {
-				throw new CreateProductoExcepcion(
+				throw new ProductoExcepcion(
 						"No se pueden traspasar 0 cantidades de un producto, no se ha seleccionado una cantidad a transferir.");
 
 			} else {
 
-				throw new CreateProductoExcepcion(
+				throw new ProductoExcepcion(
 						"No se puede realizar una operación de traspaso puesto que la cantidad indicada es superior a la almacenada en la tienda.");
 
 			}
@@ -157,7 +157,7 @@ public class ProductoServicio {
 		Producto productoSeleccionado = comprobacionDeRegistroDeProducto(id);
 
 		if (productoSeleccionado == null) {
-			throw new CreateProductoExcepcion(
+			throw new ProductoExcepcion(
 					"No se puede realizar una operación de reposición puesto que el id introducido es nulo");
 		} else {
 
@@ -168,11 +168,11 @@ public class ProductoServicio {
 				productoRepositorio.save(productoSeleccionado);
 
 			} else if (cantidad == 0) {
-				throw new CreateProductoExcepcion(
+				throw new ProductoExcepcion(
 						"No se pueden traspasar 0 cantidades de un producto, no se ha seleccionado una cantidad a transferir.");
 			} else {
 
-				throw new CreateProductoExcepcion(
+				throw new ProductoExcepcion(
 						"No se puede realizar una operación de añadir stock al almacen, porque la cantidad introducida es negativa.");
 
 			}
