@@ -1,0 +1,78 @@
+<div class="jumbotron"><div *ngIf="!lectura">
+<div *ngIf="!producto.id; then crear_tipo else modificar_tipo">será ignorado</div> 
+<ng-template #crear_tipo><h2>Crear producto</h2></ng-template>
+<ng-template #modificar_tipo><h2>Modificar producto</h2></ng-template>
+</div>
+<h2 *ngIf="lectura">Información del producto</h2>
+</div>
+
+<div class="container">
+    <form #productoForm="ngForm">
+<label for="producto-nombre">Nombre: </label>
+<input id="producto-nombre" type="text" [(ngModel)]="producto.nombre"  #producto_nombre="ngModel" name="producto_nombre" class="form-control" [disabled]="lectura" required><br>
+<div *ngIf="producto_nombre.invalid && (producto_nombre.dirty || producto_nombre.touched)" class="alert alert-warning">
+    <div *ngIf="producto_nombre.errors?.required">
+        El nombre es un campo obligatorio.
+      </div>
+</div>
+
+<label for="producto-tipo">Tipo de producto: </label>
+<select [(ngModel)]="producto.idTipoProducto" name="tipo" id="producto-tipo" #producto_tipo="ngModel" name="tipo" class="form-control" [disabled]="lectura" required>
+    <option value="undefined" disabled selected>Seleccione una opción</option>
+    <option *ngFor="let tipo of listaTipos" [ngValue]="tipo.id">{{tipo.nombre}}</option>
+</select><br>
+<div *ngIf="producto_tipo.invalid && (producto_tipo.dirty || producto_tipo.touched)" class="alert alert-warning">
+    <div *ngIf="producto_tipo.errors?.required">
+        El tipo es un campo obligatorio.
+      </div>
+</div>
+
+<label for="producto-marca">Marca: </label>
+<input id="producto-marca" type="text" [(ngModel)]="producto.marca" #producto_marca="ngModel" name="producto_marca" class="form-control" [disabled]="lectura" required><br>
+<div *ngIf="producto_marca.invalid && (producto_marca.dirty || producto_marca.touched)" class="alert alert-warning">
+    <div *ngIf="producto_marca.errors?.required">
+        La marca es un campo obligatorio.
+      </div>
+</div>
+
+<label for="producto-modelo">Modelo: </label>
+<input id="producto-modelo" type="text" [(ngModel)]="producto.modelo" #producto_modelo="ngModel" name="producto_modelo" class="form-control" [disabled]="lectura" required><br>
+<div *ngIf="producto_modelo.invalid && (producto_modelo.dirty || producto_modelo.touched)" class="alert alert-warning">
+    <div *ngIf="producto_modelo.errors?.required">
+        El modelo es un campo obligatorio.
+      </div>
+</div>
+
+<label for="producto-stock-almacen">Cantidad en almacén: </label>
+<input id="producto-stock-almacen" type="number" [(ngModel)]="producto.cantidadUnidadesAlmacen" #producto_almacen="ngModel" name="producto_almacen" class="form-control" [disabled]="lectura" required min="0"><br>
+<div *ngIf="producto_almacen.invalid && (producto_almacen.dirty || producto_tienda.touched)" class="alert alert-warning">
+    <div *ngIf="producto_tienda.errors?.required">
+        La cantidad en almacén es un campo obligatorio.
+      </div>
+      <div *ngIf="producto_almacen.errors?.min">
+        No se admiten números negativos
+      </div>
+</div>
+
+<label for="producto-stock-tienda">Cantidad en tienda: </label>
+<input id="producto-stock-tienda" type="number" [(ngModel)]="producto.cantidadUnidadesTienda" #producto_tienda="ngModel" name="producto_tienda" class="form-control" [disabled]="lectura" required min="0"><br>
+<div *ngIf="producto_tienda.invalid && (producto_tienda.dirty || producto_tienda.touched)">
+    <div *ngIf="producto_tienda.errors?.required" class="alert alert-warning">
+        La cantidad en tienda es un campo obligatorio.
+      </div>
+      <div *ngIf="producto_tienda.errors?.min" class="alert alert-warning">
+        No se admiten números negativos
+      </div>
+</div>
+
+<div *ngIf="!productoForm.form.valid && !lectura" class="alert alert-warning">
+  Debe completar el formulario correctamente.
+</div>
+
+<button id="producto-guardar" (click)="guardar()" [disabled]="lectura || !productoForm.form.valid" class="btn btn-primary float-left mr-5">Guardar</button> 
+<button id="producto-volver" (click)="volver()" class="btn btn-secondary float-right">Volver</button>
+</form>
+
+<div id="feedback" *ngIf="mensaje" class="mt-5 alert alert-success">{{mensaje}}</div>
+
+</div>
