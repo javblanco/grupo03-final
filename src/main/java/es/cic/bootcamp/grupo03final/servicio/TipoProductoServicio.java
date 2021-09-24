@@ -74,7 +74,7 @@ public class TipoProductoServicio {
 		} else {
 			throw new TipoProductoExcepcion(MENSAJE_EXCEPCION);
 		}
-		if (tipoProducto.isActivo() == true) {
+		if (tipoProducto.isActivo()) {
 			tipoProducto.setActivo(false);
 			} else {
 				throw new TipoProductoExcepcion("Ya estaba dado de baja el producto");
@@ -91,7 +91,7 @@ public class TipoProductoServicio {
 		} else {
 			throw new TipoProductoExcepcion(MENSAJE_EXCEPCION);
 		}
-		if (tipoProducto.isActivo() == false) {
+		if (!tipoProducto.isActivo()) {
 			tipoProducto.setActivo(true);
 			} else {
 				throw new TipoProductoExcepcion("Ya estaba dado de alta el producto");
@@ -110,7 +110,7 @@ public class TipoProductoServicio {
 			
 			TipoProducto p = listaCompleta.get(i);
 			
-			if ( p.isActivo() == true) {
+			if ( p.isActivo()) {
 				
 				listaActivos.add(p);
 			}

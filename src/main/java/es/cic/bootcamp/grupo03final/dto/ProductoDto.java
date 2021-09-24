@@ -18,7 +18,7 @@ public class ProductoDto {
 	private String nombre;
 	private String marca;
 	private String modelo;
-	private String descripción;
+	private String descripcion;
 	
 	@Min(value = 0)
 	private int cantidadUnidadesTienda;
@@ -30,21 +30,6 @@ public class ProductoDto {
 		super();
 	}
 
-	public ProductoDto(Long id, Long idTipoProducto, String nombreTipoProducto, TipoProducto tipoProducto,
-			String nombre, String marca, String modelo, String descripción, int cantidadUnidadesTienda,
-			int cantidadUnidadesAlmacen) {
-		super();
-		this.id = id;
-		this.idTipoProducto = idTipoProducto;
-		this.nombreTipoProducto = nombreTipoProducto;
-		this.tipoProducto = tipoProducto;
-		this.nombre = nombre;
-		this.marca = marca;
-		this.modelo = modelo;
-		this.descripción = descripción;
-		this.cantidadUnidadesTienda = cantidadUnidadesTienda;
-		this.cantidadUnidadesAlmacen = cantidadUnidadesAlmacen;
-	}
 
 	public String getNombre() {
 		return nombre;
@@ -102,12 +87,12 @@ public class ProductoDto {
 		this.modelo = modelo;
 	}
 
-	public String getDescripción() {
-		return descripción;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDescripción(String descripción) {
-		this.descripción = descripción;
+	public void setDescripcion(String descripción) {
+		this.descripcion = descripción;
 	}
 
 	public int getCantidadUnidadesTienda() {
@@ -130,7 +115,7 @@ public class ProductoDto {
 	public String toString() {
 		return "ProductoDto [id=" + id + ", nombre=" + nombre + ", idTipoProducto=" + idTipoProducto
 				+ ", nombreTipoProducto=" + nombreTipoProducto + ", tipoProducto=" + tipoProducto + ", marca=" + marca
-				+ ", modelo=" + modelo + ", descripción=" + descripción + ", cantidadUnidadesTienda="
+				+ ", modelo=" + modelo + ", descripcion=" + descripcion + ", cantidadUnidadesTienda="
 				+ cantidadUnidadesTienda + ", cantidadUnidadesAlmacen=" + cantidadUnidadesAlmacen + "]";
 	}
 

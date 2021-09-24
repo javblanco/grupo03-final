@@ -21,7 +21,7 @@ public class Grupo03FinalApplication {
 
 	@Bean
   	public CommandLineRunner demo(TipoProductoRepositorio tipoRepositorio, ProductoRepositorio productoRepositorio) {
-		  return(args) -> {
+		  return args -> {
 			  TipoProducto tipo1 = tipoRepositorio.save(new TipoProducto("Cafetera", "Hace café"));
 			  TipoProducto tipo2 = tipoRepositorio.save(new TipoProducto("Taza", "Permite tomar el café"));
 

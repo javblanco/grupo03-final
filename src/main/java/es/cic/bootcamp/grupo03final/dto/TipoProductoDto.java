@@ -1,8 +1,6 @@
 package es.cic.bootcamp.grupo03final.dto;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.Length;
 
 public class TipoProductoDto {
