@@ -91,8 +91,8 @@ public class ProductoDto {
 		return descripcion;
 	}
 
-	public void setDescripcion(String descripción) {
-		this.descripcion = descripción;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public int getCantidadUnidadesTienda() {

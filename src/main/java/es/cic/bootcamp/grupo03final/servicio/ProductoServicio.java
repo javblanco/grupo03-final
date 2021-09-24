@@ -184,14 +184,13 @@ public class ProductoServicio {
 
 		Optional<Producto> productoExiste = productoRepositorio.findById(id);
 
-		if (productoExiste.isPresent() == false) {
+		if (!productoExiste.isPresent()) {
 
 			return null;
 
 		} else {
 
-			Producto productoSeleccionado = productoExiste.get();
-			return productoSeleccionado;
+			return productoExiste.get();
 		}
 
 	}
@@ -208,7 +207,7 @@ public class ProductoServicio {
 
 			Producto p = listaCompleta.get(i);
 
-			if (p.getTipoProducto().isActivo() == true) {
+			if (p.getTipoProducto().isActivo()) {
 
 				listaActivos.add(p);
 

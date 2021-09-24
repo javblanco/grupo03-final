@@ -21,7 +21,7 @@ public class ProductoConversor {
 		producto.setNombre(dto.getNombre());
 		producto.setMarca(dto.getMarca());
 		producto.setModelo(dto.getModelo());
-		producto.setDescripción(dto.getDescripcion());
+		producto.setDescripcion(dto.getDescripcion());
 
 		if (tipoProducto != null) {
 			producto.setTipoProducto(tipoProducto);
@@ -40,7 +40,7 @@ public class ProductoConversor {
 
 		dto.setCantidadUnidadesAlmacen(p.getCantidadUnidadesAlmacen());
 		dto.setCantidadUnidadesTienda(p.getCantidadUnidadesTienda());
-		dto.setDescripcion(p.getDescripción());
+		dto.setDescripcion(p.getDescripcion());
 		dto.setId(p.getId());
 		dto.setMarca(p.getMarca());
 		dto.setModelo(p.getModelo());
@@ -67,7 +67,7 @@ public class ProductoConversor {
 			producto.setModelo(dto.getModelo());
 		}
 		if (dto.getDescripcion() != null) {
-			producto.setDescripción(dto.getDescripcion());
+			producto.setDescripcion(dto.getDescripcion());
 		}
 		if (dto.getMarca() != null) {
 			producto.setNombre(dto.getNombre());

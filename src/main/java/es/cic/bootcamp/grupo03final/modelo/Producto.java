@@ -21,7 +21,7 @@ public class Producto {
 	private String nombre;
 	private String marca;
 	private String modelo;
-	private String descripción;
+	private String descripcion;
 	
 	private int cantidadUnidadesTienda;
 	private int cantidadUnidadesAlmacen;
@@ -62,11 +62,11 @@ public class Producto {
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
-	public String getDescripción() {
-		return descripción;
+	public String getDescripcion() {
+		return descripcion;
 	}
-	public void setDescripción(String descripción) {
-		this.descripción = descripción;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	public int getCantidadUnidadesTienda() {
 		return cantidadUnidadesTienda;
@@ -84,7 +84,7 @@ public class Producto {
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", tipoProducto=" + tipoProducto + ", nombre=" + nombre + ", marca=" + marca
-				+ ", modelo=" + modelo + ", descripción=" + descripción + ", cantidadUnidadesTienda="
+				+ ", modelo=" + modelo + ", descripcion=" + descripcion + ", cantidadUnidadesTienda="
 				+ cantidadUnidadesTienda + ", cantidadUnidadesAlmacen=" + cantidadUnidadesAlmacen + "]";
 	}
 

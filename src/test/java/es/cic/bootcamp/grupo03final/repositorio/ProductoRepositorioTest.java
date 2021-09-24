@@ -119,7 +119,7 @@ class ProductoRepositorioTest {
 		Producto producto = new Producto();
 		producto.setCantidadUnidadesAlmacen(5);
 		producto.setCantidadUnidadesTienda(7);
-		producto.setDescripción("Chocolate con sabor a oreo");
+		producto.setDescripcion("Chocolate con sabor a oreo");
 		producto.setMarca("Milka");
 		producto.setModelo("Milka con Oreo");
 		producto.setNombre("MilkaOreo");

@@ -75,7 +75,7 @@ public class ProductoControladorIntegracionTest {
 		p.setNombre("balon");
 		p.setMarca("puma");
 		p.setModelo("xr22");
-		p.setDescripción("Balon de futbol 11 ideal para adultos.");
+		p.setDescripcion("Balon de futbol 11 ideal para adultos.");
 		p.setCantidadUnidadesAlmacen(0);
 		p.setCantidadUnidadesTienda(0);
 		
