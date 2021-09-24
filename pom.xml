@@ -8,7 +8,7 @@
 		<version>2.5.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.cic.bootstrap</groupId>
+	<groupId>es.cic.bootcamp</groupId>
 	<artifactId>grupo03-final</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>grupo03-final</name>
